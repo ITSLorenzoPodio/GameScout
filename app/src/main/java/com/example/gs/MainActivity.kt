@@ -14,20 +14,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val viewPager: CustomViewPager2 = findViewById(R.id.viewPager)
+        // ViewPager
+        val viewPager = findViewById<ViewPager2>(R.id.viewPager)
+        // Disabilita lo swipe tra le pagine
+        viewPager.isUserInputEnabled = false
         viewPager.adapter = PagesAdapter(this)
-        viewPager.setPagingEnabled(true)
-
 
         // TabLayout
         val tabLayout = findViewById<TabLayout>(R.id.tabsLayout)
-        TabLayoutMediator(tabLayout, viewPager as ViewPager2 ) { tab, position ->
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
                 0 -> tab.setIcon(R.drawable.baseline_home_24)
                 1 -> tab.setIcon(R.drawable.baseline_manage_search_24)
                 else -> tab.setIcon(R.drawable.baseline_accessible_forward_24)
             }
         }.attach()
-
     }
 }
