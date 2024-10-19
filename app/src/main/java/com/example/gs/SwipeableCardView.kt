@@ -25,6 +25,10 @@ class SwipeableCardView @JvmOverloads constructor(
     private var swipeListener: OnSwipeListener? = null
     private val swipeThreshold = 0.3f
 
+    init {
+        originalX = x
+    }
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -56,7 +60,8 @@ class SwipeableCardView @JvmOverloads constructor(
         return super.onTouchEvent(event)
     }
 
-    private fun swipeLeft() {
+    // Modificato da private a public per permettere l'accesso dai bottoni
+    fun swipeLeft() {
         ObjectAnimator.ofFloat(this, View.TRANSLATION_X, -width.toFloat()).apply {
             duration = 300
             addListener(object : AnimatorListenerAdapter() {
@@ -68,7 +73,8 @@ class SwipeableCardView @JvmOverloads constructor(
         }
     }
 
-    private fun swipeRight() {
+    // Modificato da private a public per permettere l'accesso dai bottoni
+    fun swipeRight() {
         ObjectAnimator.ofFloat(this, View.TRANSLATION_X, width.toFloat()).apply {
             duration = 300
             addListener(object : AnimatorListenerAdapter() {

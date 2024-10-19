@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,8 +14,9 @@ import com.example.gs.SwipeableCardView
 
 class HomeFragment : Fragment() {
     private lateinit var cardContainer: FrameLayout
+    private lateinit var likeButton: Button
+    private lateinit var skipButton: Button
     private val games = listOf(
-        // Lista originale
         Game("Dark Souls", R.drawable.game1, "Action RPG", "PS3, Xbox 360, PC", "User score: 89%"),
         Game("Halo Reach", R.drawable.game2, "First-person shooter", "Xbox 360, Xbox One, PC", "User score: 92%"),
         Game("Doom", R.drawable.game3, "First-person shooter", "PC, PS4, Xbox One, Switch", "User score: 85%"),
@@ -53,7 +55,23 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         cardContainer = view.findViewById(R.id.card_container)
+        likeButton = view.findViewById(R.id.likeButton)
+        skipButton = view.findViewById(R.id.skipButton)
+
+        setupButtons()
         addNextCard()
+    }
+
+    private fun setupButtons() {
+        likeButton.setOnClickListener {
+            val topCard = cardContainer.getChildAt(cardContainer.childCount - 1) as? SwipeableCardView
+            topCard?.swipeRight()
+        }
+
+        skipButton.setOnClickListener {
+            val topCard = cardContainer.getChildAt(cardContainer.childCount - 1) as? SwipeableCardView
+            topCard?.swipeLeft()
+        }
     }
 
     private fun addNextCard() {
@@ -74,10 +92,14 @@ class HomeFragment : Fragment() {
 
         cardView.setOnSwipeListener(object : SwipeableCardView.OnSwipeListener {
             override fun onSwipeLeft() {
+                // Skip
+                println("Game skipped: ${game.title}")
                 removeTopCard()
             }
 
             override fun onSwipeRight() {
+                // Like
+                println("Game liked: ${game.title}")
                 removeTopCard()
             }
         })

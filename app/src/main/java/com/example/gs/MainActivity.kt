@@ -22,11 +22,15 @@ class MainActivity : AppCompatActivity() {
 
         // TabLayout
         val tabLayout = findViewById<TabLayout>(R.id.tabsLayout)
+
+        // Personalizza colore delle icone deselezionate
+        //tabLayout.setTabIconTint(resources.getColorStateList(R.color.tab_icon_color, null))
+
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
-                0 -> tab.setIcon(R.drawable.baseline_home_24)
-                1 -> tab.setIcon(R.drawable.baseline_manage_search_24)
-                else -> tab.setIcon(R.drawable.baseline_accessible_forward_24)
+                0 -> tab.setIcon(R.drawable.home_tab)
+                1 -> tab.setIcon(R.drawable.search_tab)
+                else -> tab.setIcon(R.drawable.library_tab)
             }
         }.attach()
     }
