@@ -1,60 +1,120 @@
 package com.example.gs.Pages
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.gs.R
+import com.example.gs.adapters.CategoryAdapter
+import com.example.gs.adapters.RecentSearchAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var searchView: SearchView
+    private lateinit var categoriesRecyclerView: RecyclerView
+    private lateinit var recentSearchesRecyclerView: RecyclerView
+
+    private val categories = listOf("Azione", "Avventura", "RPG", "Strategia", "Sport", "Puzzle", "Simulazione", "FPS")
+    private val recentSearches = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_seach, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SeachFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        searchView = view.findViewById(R.id.searchView)
+        categoriesRecyclerView = view.findViewById(R.id.categoriesRecyclerView)
+        recentSearchesRecyclerView = view.findViewById(R.id.recentSearchesRecyclerView)
+
+        loadRecentSearches()
+        setupSearchView()
+        setupCategoriesRecyclerView()
+        setupRecentSearchesRecyclerView()
+    }
+
+    private fun setupSearchView() {
+        searchView.setOnQueryTextFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                categoriesRecyclerView.visibility = View.GONE
+                recentSearchesRecyclerView.visibility = View.VISIBLE
+            } else {
+                categoriesRecyclerView.visibility = View.VISIBLE
+                recentSearchesRecyclerView.visibility = View.GONE
             }
+        }
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    addRecentSearch(it)
+                    performSearch(it)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Implementa la ricerca in tempo reale se necessario
+                return true
+            }
+        })
+    }
+
+    private fun setupCategoriesRecyclerView() {
+        categoriesRecyclerView.layoutManager = LinearLayoutManager(context)
+        categoriesRecyclerView.adapter = CategoryAdapter(categories) { category ->
+            Toast.makeText(context, "Categoria selezionata: $category", Toast.LENGTH_SHORT).show()
+            // Implementa la logica per mostrare i giochi della categoria selezionata
+        }
+    }
+
+    private fun setupRecentSearchesRecyclerView() {
+        recentSearchesRecyclerView.layoutManager = LinearLayoutManager(context)
+        updateRecentSearchesAdapter()
+    }
+
+    private fun addRecentSearch(search: String) {
+        recentSearches.remove(search) // Rimuovi se già presente
+        recentSearches.add(0, search) // Aggiungi all'inizio
+        if (recentSearches.size > 5) {
+            recentSearches.removeAt(recentSearches.lastIndex)
+        }
+        updateRecentSearchesAdapter()
+        saveRecentSearches()
+    }
+
+    private fun updateRecentSearchesAdapter() {
+        recentSearchesRecyclerView.adapter = RecentSearchAdapter(recentSearches) { search ->
+            searchView.setQuery(search, true)
+        }
+    }
+
+    private fun performSearch(query: String) {
+        Toast.makeText(context, "Ricerca avviata per: $query", Toast.LENGTH_SHORT).show()
+        // Implementa la logica per effettuare la ricerca effettiva
+    }
+
+    private fun saveRecentSearches() {
+        context?.getSharedPreferences("SearchPrefs", Context.MODE_PRIVATE)?.edit()?.apply {
+            putStringSet("recent_searches", recentSearches.toSet())
+            apply()
+        }
+    }
+
+    private fun loadRecentSearches() {
+        context?.getSharedPreferences("SearchPrefs", Context.MODE_PRIVATE)?.let { prefs ->
+            recentSearches.clear()
+            recentSearches.addAll(prefs.getStringSet("recent_searches", setOf()) ?: setOf())
+        }
     }
 }
