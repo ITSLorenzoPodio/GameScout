@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "778053449754",
+    "firebase_url": "https://gamescout-e5aab-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "gamescout-e5aab",
+    "storage_bucket": "gamescout-e5aab.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778053449754:android:8031602b94a819c003f9a3",
+        "android_client_info": {
+          "package_name": "com.example.gs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUBOm4urob6aeYS_lHRCcaUNL9JjIAfGs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
