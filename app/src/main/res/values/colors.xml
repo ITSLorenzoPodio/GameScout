@@ -6,6 +6,9 @@
     <color name="gray">#FF757575</color>
     <color name="backgroundBlue">#FF14366F</color><!-- o il colore che preferisci per le icone non selezionate -->
     <color name="backgroundGreen">#FF63e5c5</color>
-    <color name="cardInfoBackground">#FF1B6682</color>
+    <color name="cardBackground">#0d1015</color>
+    <color name="cardInfoBackground">#0d1015</color>
+    <color name="backgroundGray">#a2a3a3</color>
+
 
 </resources>

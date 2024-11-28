@@ -6,6 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.gs.pages.CollectionFragment
 import com.example.gs.pages.HomeFragment
 import com.example.gs.pages.SearchFragment
+import com.example.gs.pages.SettingsFragment
 
 class PagesAdapter(
     private val fa: FragmentActivity,
@@ -14,7 +15,7 @@ class PagesAdapter(
 
     private val fragmentsMap = mutableMapOf<Int, Fragment>()
 
-    override fun getItemCount(): Int = 3
+    override fun getItemCount(): Int = 4  // Changed from 3 to 4
 
     override fun createFragment(position: Int): Fragment {
         fragmentsMap[position]?.let { return it }
@@ -31,18 +32,11 @@ class PagesAdapter(
                 homeFragment
             }
             1 -> SearchFragment()
-            else -> CollectionFragment()
+            2 -> CollectionFragment()
+            else -> SettingsFragment()
         }
 
         fragmentsMap[position] = fragment
         return fragment
-    }
-
-    fun getHomeFragment(): HomeFragment? {
-        return fragmentsMap[0] as? HomeFragment
-    }
-
-    fun getCollectionFragment(): CollectionFragment? {
-        return fragmentsMap[2] as? CollectionFragment
     }
 }

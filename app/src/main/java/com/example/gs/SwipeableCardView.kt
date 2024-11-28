@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.FrameLayout
 import kotlin.math.abs
@@ -19,9 +20,19 @@ import kotlin.math.min
  */
 class SwipeableCardView : FrameLayout {
     // Constructors
-    constructor(context: Context) : super(context)
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    constructor(context: Context) : super(context) {
+        init()
+    }
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        init()
+    }
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
+        init()
+    }
 
     // Properties with default values
     private var originalX = 0f
@@ -38,25 +49,24 @@ class SwipeableCardView : FrameLayout {
         const val RESET_ANIMATION_DURATION = 200L // Duration for reset animations
     }
 
-    init {
-        // Initialize view properties
+    private fun init() {
         with(this) {
             originalX = x
             originalY = y
-            elevation = 24f
-            translationZ = 8f
+            elevation = resources.displayMetrics.density * 8 // 8dp elevation
+            clipChildren = true
+            clipToOutline = true
+            background = resources.getDrawable(R.drawable.card_background, null)
         }
     }
+
 
     /**
      * Handles touch events for the card view.
      * Implements dragging, rotation, and swipe detection logic.
      */
-    // With this, the card is touchable, and movable
     override fun onTouchEvent(event: MotionEvent): Boolean {
         return when (event.action) {
-
-            //Action down is when you press for the first time
             MotionEvent.ACTION_DOWN -> {
                 // Initial positions when touch begins
                 originalX = x
@@ -65,7 +75,6 @@ class SwipeableCardView : FrameLayout {
                 true
             }
 
-            //Action move if you move while pressing
             MotionEvent.ACTION_MOVE -> {
                 // Moves the card when it changes position
                 val moveX = event.rawX + dX - originalX
@@ -83,7 +92,6 @@ class SwipeableCardView : FrameLayout {
                 true
             }
 
-            //Action up when you release the finger
             MotionEvent.ACTION_UP -> {
                 // Determine if swipe threshold was met
                 // abs = absolute value (always positive)
@@ -119,9 +127,6 @@ class SwipeableCardView : FrameLayout {
         }
     }
 
-    /**
-     * Applies a darkness overlay to the card with the specified intensity.
-     */
     private fun setDarkness(factor: Float) {
         removeOverlay()
         addView(View(context).apply {
@@ -131,16 +136,12 @@ class SwipeableCardView : FrameLayout {
         })
     }
 
-    /**
-     * Removes any existing darkness overlay from the card.
-     */
     private fun removeOverlay() {
-        for (i in 0 until childCount) {
-            getChildAt(i).let { child ->
-                if ((child.background?.alpha ?: 0) > 0) {
-                    removeView(child)
-
-                }
+        // Safely iterate through children and remove any overlay views
+        for (i in childCount - 1 downTo 0) {
+            val child = getChildAt(i)
+            if (child != null && child.background != null && child.background.alpha > 0) {
+                removeView(child)
             }
         }
     }
@@ -191,8 +192,8 @@ class SwipeableCardView : FrameLayout {
         }
 
         // Apply rotation animation
-//        animate()
-//            .rotation(ROTATION_FACTOR)
+        animate()
+            .rotation(ROTATION_FACTOR)
             .setDuration(ANIMATION_DURATION)
             .start()
     }

@@ -12,6 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Liked Games"
+            android:textColor="#37ba69"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_marginBottom="8dp"/>
@@ -26,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Skipped Games"
+            android:textColor="#e62138"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_marginTop="24dp"

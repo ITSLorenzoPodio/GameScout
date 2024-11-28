@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gs.MainActivity
@@ -93,16 +94,10 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupCategoriesRecyclerView() {
-        categoriesRecyclerView.layoutManager = LinearLayoutManager(context)
-        categoriesRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+        val spanCount = 2 // Number of columns
+        categoriesRecyclerView.layoutManager = GridLayoutManager(context, spanCount)
         categoriesRecyclerView.adapter = CategoryAdapter(categories) { category ->
-            // Add logging to verify the click is working
-            println("Category selected: $category")
-            (activity as? MainActivity)?.let { mainActivity ->
-                // Add logging to verify the activity cast works
-                println("Found MainActivity, sending category")
-                mainActivity.onCategorySelected(category)
-            }
+            (activity as? MainActivity)?.onCategorySelected(category)
         }
     }
 

@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="#14191d">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,25 +31,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@android:color/white"/>
 
             <TextView
                 android:id="@+id/gameGenre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:textColor="@color/backgroundGray"/>
 
             <TextView
                 android:id="@+id/gamePlatforms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:textColor="@color/backgroundGray"/>
 
             <TextView
                 android:id="@+id/gameScore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:textColor="@color/backgroundGray"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
