@@ -1,26 +1,30 @@
 package com.example.gs
 
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
-import com.example.gs.Pages.HomeFragment
+import com.example.gs.adapters.PagesAdapter
+import com.example.gs.pages.HomeFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MainActivity : AppCompatActivity() {
+interface GameCollectionListener {
+    fun onGameSaved(game: HomeFragment.Game, isLiked: Boolean)
+}
+
+class MainActivity : AppCompatActivity(), GameCollectionListener {
+    private lateinit var viewPager: ViewPager2
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         // Retrieve games list from intent
         val gamesList = intent.getParcelableArrayListExtra<HomeFragment.Game>("GAMES_LIST")
 
         // ViewPager
-        val viewPager = findViewById<ViewPager2>(R.id.viewPager)
+        viewPager = findViewById(R.id.viewPager)
         viewPager.isUserInputEnabled = false
         viewPager.adapter = PagesAdapter(this, gamesList)
 
@@ -34,5 +38,35 @@ class MainActivity : AppCompatActivity() {
                 2 -> tab.setIcon(R.drawable.library_tab)
             }
         }.attach()
+    }
+
+    fun onCategorySelected(category: String?) {
+        println("MainActivity received category: $category")
+        val pagerAdapter = viewPager.adapter as? PagesAdapter
+        println("Got pager adapter: ${pagerAdapter != null}")
+
+        val homeFragment = pagerAdapter?.getHomeFragment()
+        println("Got home fragment: ${homeFragment != null}")
+
+        homeFragment?.onCategorySelected(category)
+        viewPager.currentItem = 0
+    }
+
+    fun onSearchSubmitted(searchQuery: String) {
+        val pagerAdapter = viewPager.adapter as? PagesAdapter
+        val homeFragment = pagerAdapter?.getHomeFragment()
+        homeFragment?.onSearchSubmitted(searchQuery)
+
+        // Switch to home tab
+        viewPager.currentItem = 0
+    }
+
+    override fun onGameSaved(game: HomeFragment.Game, isLiked: Boolean) {
+        try {
+            val pagerAdapter = viewPager.adapter as? PagesAdapter
+            pagerAdapter?.getCollectionFragment()?.addGame(game, isLiked)
+        } catch (e: Exception) {
+            println("Error saving game: ${e.message}")
+        }
     }
 }
