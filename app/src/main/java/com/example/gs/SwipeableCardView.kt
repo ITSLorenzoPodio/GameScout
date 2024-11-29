@@ -57,6 +57,23 @@ class SwipeableCardView : FrameLayout {
             clipChildren = true
             clipToOutline = true
             background = resources.getDrawable(R.drawable.card_background, null)
+            isClickable = true // Add this line
+        }
+    }
+
+    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
+        return when (ev.action) {
+            MotionEvent.ACTION_DOWN -> {
+                originalX = x
+                originalY = y
+                dX = x - ev.rawX
+                false // Return false to allow click events
+            }
+            MotionEvent.ACTION_MOVE -> {
+                val moved = Math.abs(ev.rawX + dX - originalX)
+                moved > 10 // Only intercept if moved more than 10px
+            }
+            else -> false
         }
     }
 

@@ -13,14 +13,14 @@ class PagesAdapter(
     private val gamesList: List<HomeFragment.Game>? = null
 ) : FragmentStateAdapter(fa) {
 
-    private val fragmentsMap = mutableMapOf<Int, Fragment>()
+    private val collectionFragment = CollectionFragment()
 
-    override fun getItemCount(): Int = 4  // Changed from 3 to 4
+    fun getCollectionFragment(): CollectionFragment = collectionFragment
+
+    override fun getItemCount(): Int = 4
 
     override fun createFragment(position: Int): Fragment {
-        fragmentsMap[position]?.let { return it }
-
-        val fragment = when (position) {
+        return when (position) {
             0 -> {
                 val homeFragment = HomeFragment()
                 gamesList?.let { games ->
@@ -32,11 +32,8 @@ class PagesAdapter(
                 homeFragment
             }
             1 -> SearchFragment()
-            2 -> CollectionFragment()
+            2 -> collectionFragment
             else -> SettingsFragment()
         }
-
-        fragmentsMap[position] = fragment
-        return fragment
     }
 }

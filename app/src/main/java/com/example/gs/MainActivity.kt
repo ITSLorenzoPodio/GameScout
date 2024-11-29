@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gs.adapters.PagesAdapter
-import com.example.gs.pages.CollectionFragment
 import com.example.gs.pages.HomeFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -15,7 +14,8 @@ interface GameCollectionListener {
 }
 
 class MainActivity : AppCompatActivity(), GameCollectionListener {
-    lateinit var viewPager: ViewPager2  // Changed from private to public
+    lateinit var viewPager: ViewPager2
+    private lateinit var pagesAdapter: PagesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity(), GameCollectionListener {
         // ViewPager
         viewPager = findViewById(R.id.viewPager)
         viewPager.isUserInputEnabled = false
-        viewPager.adapter = PagesAdapter(this, gamesList)
+        pagesAdapter = PagesAdapter(this, gamesList)
+        viewPager.adapter = pagesAdapter
 
         // TabLayout
         val tabLayout = findViewById<TabLayout>(R.id.tabsLayout)
@@ -41,7 +42,6 @@ class MainActivity : AppCompatActivity(), GameCollectionListener {
             }
         }.attach()
 
-// Add this after the TabLayoutMediator
         tabLayout.setTabIconTint(ContextCompat.getColorStateList(this, R.color.tab_icon_color))
     }
 
@@ -63,11 +63,10 @@ class MainActivity : AppCompatActivity(), GameCollectionListener {
 
     override fun onGameSaved(game: HomeFragment.Game, isLiked: Boolean) {
         try {
-            val pagerAdapter = viewPager.adapter as? PagesAdapter
-            val collectionFragment = supportFragmentManager.findFragmentByTag("f2") as? CollectionFragment
-            collectionFragment?.addGame(game, isLiked)
+            pagesAdapter.getCollectionFragment().addGame(game, isLiked)
         } catch (e: Exception) {
             println("Error saving game: ${e.message}")
+            e.printStackTrace()
         }
     }
 }

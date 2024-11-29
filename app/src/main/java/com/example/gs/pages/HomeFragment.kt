@@ -1,6 +1,8 @@
 package com.example.gs.pages
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
@@ -11,6 +13,7 @@ import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.gs.GameCollectionListener
@@ -179,6 +182,23 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         cardView.findViewById<TextView>(R.id.gameGenre).text = game.genre
         cardView.findViewById<TextView>(R.id.gamePlatforms).text = game.platforms
         cardView.findViewById<TextView>(R.id.gameScore).text = game.userScore
+        cardView.findViewById<TextView>(R.id.gamePrice).text = game.price.toString()
+
+        // Add click listener to open URL
+        // Inside addNextCard()
+        cardView.findViewById<View>(R.id.swiper).setOnClickListener {
+            if (game.url.isNotEmpty()) {
+                try {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(game.url))
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    Toast.makeText(context, "Could not open URL: ${e.message}", Toast.LENGTH_SHORT).show()
+                    e.printStackTrace()
+                }
+            } else {
+                Toast.makeText(context, "No URL available", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         cardView.setOnSwipeListener(object : SwipeableCardView.OnSwipeListener {
             override fun onSwipeLeft() {
@@ -226,6 +246,7 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         val userScore: String = "",
         val description: String = "",
         val price: Double = 0.0,
-        val rating: Double = 0.0
+        val rating: Double = 0.0,
+        val url: String = ""
     ) : Parcelable
 }
