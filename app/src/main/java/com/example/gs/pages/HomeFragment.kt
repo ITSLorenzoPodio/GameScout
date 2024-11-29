@@ -32,6 +32,7 @@ class HomeFragment : Fragment(), CategorySelectionListener {
     private val filteredGames = mutableListOf<Game>()
     private var gameCollectionListener: GameCollectionListener? = null
     private var currentCategory: String? = null
+    private var selectedCategories: List<String> = emptyList()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -104,6 +105,34 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         skipButton.setOnClickListener {
             val topCard = cardContainer.getChildAt(cardContainer.childCount - 1) as? SwipeableCardView
             topCard?.swipeLeft()
+        }
+    }
+
+    fun setSelectedCategories(categories: List<String>) {
+        selectedCategories = categories
+        filterGames()
+    }
+
+    private fun filterGames() {
+        filteredGames.clear()
+
+        if (selectedCategories.isEmpty()) {
+            filteredGames.addAll(allGames)
+        } else {
+            filteredGames.addAll(allGames.filter { game ->
+                val gameGenres = game.genre.split(",").map { it.trim() }
+                // Check if any of the game's genres match any of the selected categories
+                selectedCategories.any { category ->
+                    gameGenres.any { it.equals(category, ignoreCase = true) }
+                }
+            })
+        }
+
+        // Reset and refresh the card stack
+        cardContainer.removeAllViews()
+        currentIndex = 0
+        if (filteredGames.isNotEmpty()) {
+            addNextCard()
         }
     }
 

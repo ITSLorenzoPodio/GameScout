@@ -60,6 +60,7 @@ class CollectionFragment : Fragment() {
         gameView.findViewById<TextView>(R.id.gameGenre).text = game.genre
         gameView.findViewById<TextView>(R.id.gamePlatforms).text = game.platforms
         gameView.findViewById<TextView>(R.id.gameScore).text = getString(R.string.score) + game.userScore
+        gameView.findViewById<TextView>(R.id.gamePrice).text = game.price.toString() + getString(R.string.price)
 
         // Load game image
         Glide.with(requireContext())

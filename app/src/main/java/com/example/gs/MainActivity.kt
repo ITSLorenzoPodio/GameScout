@@ -2,6 +2,7 @@ package com.example.gs
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gs.adapters.PagesAdapter
 import com.example.gs.pages.CollectionFragment
@@ -39,15 +40,17 @@ class MainActivity : AppCompatActivity(), GameCollectionListener {
                 3 -> tab.setIcon(R.drawable.baseline_settings_24)
             }
         }.attach()
+
+// Add this after the TabLayoutMediator
+        tabLayout.setTabIconTint(ContextCompat.getColorStateList(this, R.color.tab_icon_color))
     }
 
-    fun onCategorySelected(category: String?) {
-        val pagerAdapter = viewPager.adapter as? PagesAdapter
-        val currentFragment = supportFragmentManager.findFragmentByTag("f0")
-        if (currentFragment is HomeFragment) {
-            currentFragment.onCategorySelected(category)
-        }
-        viewPager.currentItem = 0
+    fun onCategoriesSelected(categories: List<String>) {
+        val homeFragment = supportFragmentManager.fragments
+            .filterIsInstance<HomeFragment>()
+            .firstOrNull()
+
+        homeFragment?.setSelectedCategories(categories)
     }
 
     fun onSearchSubmitted(searchQuery: String) {

@@ -11,7 +11,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,12 +20,15 @@ import com.example.gs.adapters.CategoryAdapter
 import com.example.gs.adapters.RecentSearchAdapter
 
 class SearchFragment : Fragment() {
-
     private lateinit var searchView: SearchView
     private lateinit var categoriesRecyclerView: RecyclerView
     private lateinit var recentSearchesRecyclerView: RecyclerView
+    private lateinit var categoryAdapter: CategoryAdapter
 
-    private val categories = listOf("Action", "Adventure", "Roguelike", "Survival", "Racing", "Simulation", "First-Person Shooter", "Tactical")
+    private val categories = listOf(
+        "Action", "Adventure", "Roguelike", "Survival",
+        "Racing", "Simulation", "First-Person Shooter", "Tactical"
+    )
     private val recentSearches = mutableListOf<String>()
 
     override fun onCreateView(
@@ -43,25 +45,21 @@ class SearchFragment : Fragment() {
         categoriesRecyclerView = view.findViewById(R.id.categoriesRecyclerView)
         recentSearchesRecyclerView = view.findViewById(R.id.recentSearchesRecyclerView)
 
-        setupSearchViewAppearance() // Aggiungi questa linea
+        setupSearchViewAppearance()
         loadRecentSearches()
         setupSearchView()
         setupCategoriesRecyclerView()
         setupRecentSearchesRecyclerView()
     }
 
-    // Aggiungi questo metodo per personalizzare l'aspetto della SearchView
     private fun setupSearchViewAppearance() {
-        // Trova l'EditText nella SearchView
         val searchEditText = searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
-        searchEditText.setTextColor(Color.WHITE) // Colore del testo
-        searchEditText.setHintTextColor(Color.WHITE) // Colore dell'hint
+        searchEditText.setTextColor(Color.WHITE)
+        searchEditText.setHintTextColor(Color.WHITE)
 
-        // Cambia il colore dell'icona di ricerca
         val searchIcon = searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
         searchIcon.setColorFilter(Color.WHITE)
 
-        // Cambia il colore dell'icona di chiusura (X)
         val closeIcon = searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_close_btn)
         closeIcon.setColorFilter(Color.WHITE)
     }
@@ -87,18 +85,19 @@ class SearchFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // Optional: implement real-time search
                 return true
             }
         })
     }
 
     private fun setupCategoriesRecyclerView() {
-        val spanCount = 2 // Number of columns
+        val spanCount = 2
         categoriesRecyclerView.layoutManager = GridLayoutManager(context, spanCount)
-        categoriesRecyclerView.adapter = CategoryAdapter(categories) { category ->
-            (activity as? MainActivity)?.onCategorySelected(category)
+        categoryAdapter = CategoryAdapter(categories) { selectedCategories ->
+            // Immediately notify MainActivity of the selected categories
+            (activity as? MainActivity)?.onCategoriesSelected(selectedCategories)
         }
+        categoriesRecyclerView.adapter = categoryAdapter
     }
 
     private fun setupRecentSearchesRecyclerView() {
@@ -107,8 +106,8 @@ class SearchFragment : Fragment() {
     }
 
     private fun addRecentSearch(search: String) {
-        recentSearches.remove(search) // Rimuovi se già presente
-        recentSearches.add(0, search) // Aggiungi all'inizio
+        recentSearches.remove(search)
+        recentSearches.add(0, search)
         if (recentSearches.size > 5) {
             recentSearches.removeAt(recentSearches.lastIndex)
         }
@@ -118,14 +117,9 @@ class SearchFragment : Fragment() {
 
     private fun updateRecentSearchesAdapter() {
         recentSearchesRecyclerView.adapter = RecentSearchAdapter(recentSearches) { search ->
-            searchView.setQuery(search, false) // Don't submit automatically
+            searchView.setQuery(search, false)
             (activity as? MainActivity)?.onSearchSubmitted(search)
         }
-    }
-
-    private fun performSearch(query: String) {
-        Toast.makeText(context, "Ricerca avviata per: $query", Toast.LENGTH_SHORT).show()
-        // Implementa la logica per effettuare la ricerca effettiva
     }
 
     private fun saveRecentSearches() {
