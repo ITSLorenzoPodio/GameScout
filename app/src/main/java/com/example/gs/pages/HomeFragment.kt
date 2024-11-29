@@ -179,6 +179,7 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         cardView.findViewById<TextView>(R.id.gameGenre).text = game.genre
         cardView.findViewById<TextView>(R.id.gamePlatforms).text = game.platforms
         cardView.findViewById<TextView>(R.id.gameScore).text = game.userScore
+        cardView.findViewById<TextView>(R.id.gamePrice).text = game.price.toString()
 
         cardView.setOnSwipeListener(object : SwipeableCardView.OnSwipeListener {
             override fun onSwipeLeft() {
