@@ -38,6 +38,8 @@ android {
 }
 
 dependencies {
+    implementation (libs.circleimageview)
+    implementation (libs.material.v1110)
     implementation(libs.glide)
     implementation(libs.firebase.database.ktx)
     annotationProcessor(libs.compiler)
