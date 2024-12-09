@@ -34,7 +34,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/baseline_blind_24"
+                    android:src="@drawable/baseline_menu_24"
                     app:tint="@android:color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -51,11 +51,11 @@
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <ImageButton
-                    android:id="@+id/notificationsButton"
+                    android:id="@+id/infoButton"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/baseline_circle_notifications_24"
+                    android:src="@drawable/baseline_info_24"
                     app:tint="@android:color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -81,8 +81,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:tabIndicatorColor="@color/yellow"/>
+            app:tabIndicatorColor="@color/yellow" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

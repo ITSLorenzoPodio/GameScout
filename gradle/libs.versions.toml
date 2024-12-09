@@ -16,6 +16,8 @@ googleGmsGoogleServices = "4.4.2"
 firebaseDatabase = "21.0.0"
 firebaseDatabaseKtx = "21.0.0"
 materialVersion = "1.11.0"
+firebaseInappmessaging = "21.0.1"
+preferenceKtx = "1.2.1"
 
 [libraries]
 
@@ -34,6 +36,8 @@ androidx-core-animation = { group = "androidx.core", name = "core-animation", ve
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 material-v1110 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+firebase-inappmessaging = { group = "com.google.firebase", name = "firebase-inappmessaging", version.ref = "firebaseInappmessaging" }
+androidx-preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preferenceKtx" }
 
 [plugins]
 

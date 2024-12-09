@@ -42,6 +42,8 @@ dependencies {
     implementation (libs.material.v1110)
     implementation(libs.glide)
     implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.inappmessaging)
+    implementation(libs.androidx.preference.ktx)
     annotationProcessor(libs.compiler)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

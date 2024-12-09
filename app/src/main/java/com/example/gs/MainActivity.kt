@@ -1,5 +1,6 @@
 package com.example.gs
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageButton
@@ -13,6 +14,7 @@ import com.example.gs.pages.HomeFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.example.gs.SettingsActivity
 
 interface GameCollectionListener {
     fun onGameSaved(game: HomeFragment.Game, isLiked: Boolean)
@@ -37,7 +39,7 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        findViewById<ImageButton>(R.id.notificationsButton).setOnClickListener {
+        findViewById<ImageButton>(R.id.infoButton).setOnClickListener {
             // Gestisci click sulle notifiche
         }
 
@@ -58,7 +60,6 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
                 0 -> tab.setIcon(R.drawable.home_tab)
                 1 -> tab.setIcon(R.drawable.search_tab)
                 2 -> tab.setIcon(R.drawable.library_tab)
-                3 -> tab.setIcon(R.drawable.baseline_settings_24)
             }
         }.attach()
 
@@ -68,22 +69,17 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_profile -> {
-                // Gestisci click sul profilo
-            }
-            R.id.nav_wishlist -> {
-                // Gestisci click sulla wishlist
-            }
-            R.id.nav_library -> {
-                // Gestisci click sulla libreria
+                // TODO
             }
             R.id.nav_settings -> {
-                // Gestisci click sulle impostazioni
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_help -> {
-                // Gestisci click sull'aiuto
+                // TODO
             }
             R.id.nav_logout -> {
-                // Gestisci click sul logout
+                // TODO
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)

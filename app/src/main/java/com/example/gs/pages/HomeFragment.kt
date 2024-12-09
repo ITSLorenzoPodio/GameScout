@@ -2,6 +2,7 @@ package com.example.gs.pages
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
@@ -181,8 +182,19 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         cardView.findViewById<TextView>(R.id.gameTitle).text = game.title
         cardView.findViewById<TextView>(R.id.gameGenre).text = game.genre
         cardView.findViewById<TextView>(R.id.gamePlatforms).text = game.platforms
-        cardView.findViewById<TextView>(R.id.gameScore).text = game.userScore
-        cardView.findViewById<TextView>(R.id.gamePrice).text = game.price.toString()
+        var gamerScore = cardView.findViewById<TextView>(R.id.gameScore)
+        if (game.rating > 0.90) {
+            gamerScore.text = "Estremamente positiva"
+        } else if (game.rating > 0.60) {
+            gamerScore.text = "Perlopiù positiva"
+        } else if (game.rating > 0.40) {
+            gamerScore.text = "Nella media"
+            gamerScore.setTextColor(Color.parseColor("#b9a074"))
+        } else {
+            gamerScore.text = "Perlopiù negativa"
+            gamerScore.setTextColor(Color.parseColor("#984a27"))
+        }
+        cardView.findViewById<TextView>(R.id.gamePrice).text = game.price.toString() + " €"
 
         // Add click listener to open URL
         // Inside addNextCard()

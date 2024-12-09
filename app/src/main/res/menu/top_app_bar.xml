@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/menu_profile"
-        android:icon="@drawable/baseline_blind_24"
+        android:icon="@drawable/baseline_settings_24"
         android:title="Profilo"
         app:showAsAction="ifRoom"/>
 
