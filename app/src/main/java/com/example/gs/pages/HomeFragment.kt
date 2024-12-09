@@ -3,6 +3,7 @@ package com.example.gs.pages
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
@@ -194,10 +195,34 @@ class HomeFragment : Fragment(), CategorySelectionListener {
             gamerScore.text = "Perlopiù negativa"
             gamerScore.setTextColor(Color.parseColor("#984a27"))
         }
-        cardView.findViewById<TextView>(R.id.gamePrice).text = game.price.toString() + " €"
 
-        // Add click listener to open URL
-        // Inside addNextCard()
+        val discountView = cardView.findViewById<TextView>(R.id.gameDiscount)
+        val originalPriceView = cardView.findViewById<TextView>(R.id.gameOriginalPrice)
+        val currentPriceView = cardView.findViewById<TextView>(R.id.gameCurrentPrice)
+
+        if (game.originalPrice == 0.0 && game.currentPrice == 0.0) {
+            currentPriceView.text = "Free to Play"
+            discountView.visibility = View.GONE
+            originalPriceView.visibility = View.GONE
+        } else {
+            if (game.discount > 0) {
+                discountView.visibility = View.VISIBLE
+                originalPriceView.visibility = View.VISIBLE
+                discountView.text = "-${(game.discount * 100).toInt()}%"
+                originalPriceView.text = "€${String.format("%.2f", game.originalPrice)}"
+                originalPriceView.paintFlags = originalPriceView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            } else {
+                discountView.visibility = View.GONE
+                originalPriceView.visibility = View.GONE
+            }
+
+            if (game.currentPrice == 0.0) {
+                currentPriceView.text = "Free"
+            } else {
+                currentPriceView.text = "€${String.format("%.2f", game.currentPrice)}"
+            }
+        }
+
         cardView.findViewById<View>(R.id.swiper).setOnClickListener {
             if (game.url.isNotEmpty()) {
                 try {
@@ -257,7 +282,9 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         val platforms: String = "",
         val userScore: String = "",
         val description: String = "",
-        val price: Double = 0.0,
+        val originalPrice: Double = 0.0,
+        val currentPrice: Double = 0.0,
+        val discount: Double = 0.0,
         val rating: Double = 0.0,
         val url: String = ""
     ) : Parcelable

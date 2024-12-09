@@ -20,19 +20,19 @@ class ThorActivity : AppCompatActivity() {
     // Dati per le schermate del tutorial
     private val tutorialPages = listOf(
         TutorialPage(
-            R.drawable.foto_presentazione,
-            "Fabio.",
-            "Fabio è quel tipo di persona che si sveglia ogni mattina con una missione: rendere il mondo più surreale. Indossa cravatte sopra le magliette, un calzino di lana e uno di seta, e ha una collezione di cappelli che include uno fatto interamente di cucchiai. Si presenta con un monociclo persino per andare a prendere il pane. Ogni conversazione con lui finisce inevitabilmente con un monologo sul perché le patatine dovrebbero essere considerate \"il cibo dell'anima\". Una volta ha comprato 37 piccioni solo per metterli in fila e vedere \"se creano un pattern matematico\". È convinto che l'universo lo stia spiando e, sinceramente, potrebbe anche aver ragione."
+            R.drawable.tutorial1,
+            "Scopri giochi nuovi",
+            "Scorri a destra per salvare i giochi che ti piacciono, a sinistra per quelli che non ti interessano. Un modo veloce e divertente per trovare il tuo prossimo gioco preferito!"
         ),
         TutorialPage(
-            R.drawable.podio_presentation,
-            "Lorenzo Podio",
-            "Lorenzo è un genio... o forse no, chi lo sa. Costruisce macchinari assurdi nel garage, tipo un tostapane che fa karaoke o un aspirapolvere che recita poesie mentre pulisce. Vive seguendo leggi tutte sue: ad esempio, ogni martedì è \"la giornata dell'inversione\", quindi cammina all'indietro e saluta con un \"arrivederci\" quando entra. Una volta ha organizzato una gara di rotolamento giù per una collina usando solo palloni da calcio sgonfi: nessuno sa chi abbia vinto, nemmeno lui. Se gli chiedi cosa fa nella vita, ti risponde sempre: \"Sto cercando di convincere i semafori a collaborare con me\"."
+            R.drawable.tutorial2,
+            "Trova esattamente quello che cerchi",
+            "Usa i filtri avanzati e la barra di ricerca per trovare giochi per genere, prezzo, piattaforma e molto altro ancora!"
         ),
         TutorialPage(
-            R.drawable.parisi_presentation,
-            "Lorenzo Parisi",
-            "Questo Lorenzo vive nel suo mondo parallelo. È il tipo che parla con i cartelli stradali e pretende che gli rispondano. Sostiene che \"ogni cosa ha un'anima\", quindi è stato visto fare complimenti a un tostapane e consolare un palloncino scoppiato. Una volta ha speso una giornata intera inseguendo una farfalla, convinto che fosse un messaggero cosmico. La sua casa è un museo di cose improbabili: pigne dipinte a mano, mollette per bucato trasformate in action figures, e un'antenna TV che usa come scultura. Dice sempre: \"Se la vita non ti sorprende, sorprendi la vita!\" E lo fa, ogni giorno."
+            R.drawable.tutorial3,
+            "Organizza Le Tue Scoperte",
+            "Accedi facilmente alla tua lista di giochi salvati e acquistali direttamente su Steam o Epic quando sei pronto!"
         )
     )
 

@@ -1,5 +1,7 @@
 package com.example.gs.pages
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.gs.R
@@ -60,12 +63,25 @@ class CollectionFragment : Fragment() {
         gameView.findViewById<TextView>(R.id.gameGenre).text = game.genre
         gameView.findViewById<TextView>(R.id.gamePlatforms).text = game.platforms
         gameView.findViewById<TextView>(R.id.gameScore).text = getString(R.string.score) + game.userScore
-        gameView.findViewById<TextView>(R.id.gamePrice).text = game.price.toString() + getString(R.string.price)
+        gameView.findViewById<TextView>(R.id.gamePrice).text = game.currentPrice.toString() + getString(R.string.price)
 
         // Load game image
         Glide.with(requireContext())
             .load(game.imageUrl)
             .into(gameView.findViewById(R.id.gameImage))
+
+        gameView.setOnClickListener {
+            if (game.url.isNotEmpty()) {
+                try {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(game.url))
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    Toast.makeText(context, "Could not open URL: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(context, "No URL available", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         // Add the view to the container
         container.addView(gameView)
@@ -85,6 +101,8 @@ class CollectionFragment : Fragment() {
             addGameView(game, skippedGamesContainer)
         }
     }
+
+
 
     companion object {
         fun newInstance() = CollectionFragment()

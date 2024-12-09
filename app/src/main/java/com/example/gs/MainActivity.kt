@@ -15,6 +15,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.example.gs.SettingsActivity
+import com.example.gs.pages.AboutActivity
 
 interface GameCollectionListener {
     fun onGameSaved(game: HomeFragment.Game, isLiked: Boolean)
@@ -76,7 +77,8 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
                 startActivity(intent)
             }
             R.id.nav_help -> {
-                // TODO
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_logout -> {
                 // TODO
