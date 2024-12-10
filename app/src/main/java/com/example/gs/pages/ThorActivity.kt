@@ -55,7 +55,7 @@ class ThorActivity : AppCompatActivity() {
                 viewPager.currentItem++
             } else {
                 // All'ultima pagina, vai a LoadingActivity
-                startActivity(Intent(this, LoadingActivity::class.java))
+                startActivity(Intent(this, AuthActivity::class.java))
                 finish()
             }
         }

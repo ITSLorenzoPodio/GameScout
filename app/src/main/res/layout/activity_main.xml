@@ -45,10 +45,10 @@
                     android:layout_width="100dp"
                     android:layout_height="32dp"
                     android:src="@mipmap/ic_launcher"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/infoButton"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
                     android:id="@+id/infoButton"
@@ -56,7 +56,7 @@
                     android:layout_height="24dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/baseline_info_24"
-                    app:tint="@android:color/white"
+                    app:tint="@color/backgroundGrey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"

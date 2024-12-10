@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -16,6 +17,8 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.example.gs.SettingsActivity
 import com.example.gs.pages.AboutActivity
+import com.example.gs.pages.AuthActivity
+import com.google.firebase.auth.FirebaseAuth
 
 interface GameCollectionListener {
     fun onGameSaved(game: HomeFragment.Game, isLiked: Boolean)
@@ -40,9 +43,6 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        findViewById<ImageButton>(R.id.infoButton).setOnClickListener {
-            // Gestisci click sulle notifiche
-        }
 
         // Retrieve games list from intent
         val gamesList = intent.getParcelableArrayListExtra<HomeFragment.Game>("GAMES_LIST")
@@ -81,7 +81,25 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
                 startActivity(intent)
             }
             R.id.nav_logout -> {
-                // TODO
+                // Esci dall'account Firebase
+                FirebaseAuth.getInstance().signOut()
+
+                // Crea un intent per tornare alla schermata di login
+                val intent = Intent(this, AuthActivity::class.java)
+
+                // Aggiungi flag per pulire lo stack delle activity
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                        Intent.FLAG_ACTIVITY_NEW_TASK)
+
+                // Avvia l'activity di login
+                startActivity(intent)
+
+                // Chiudi l'activity corrente
+                finish()
+
+                // (Opzionale) Mostra un toast per confermare il logout
+                Toast.makeText(this, "Disconnesso con successo", Toast.LENGTH_SHORT).show()
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)

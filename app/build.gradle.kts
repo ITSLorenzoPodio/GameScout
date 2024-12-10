@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.firebase.database.ktx)
     implementation(libs.firebase.inappmessaging)
     implementation(libs.androidx.preference.ktx)
+    implementation(libs.firebase.auth.ktx)
     annotationProcessor(libs.compiler)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

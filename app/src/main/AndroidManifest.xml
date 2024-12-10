@@ -16,6 +16,9 @@
             android:name=".pages.AboutActivity"
             android:exported="false" />
         <activity
+            android:name=".pages.AuthActivity"
+            android:exported="false" />
+        <activity
             android:name=".SettingsActivity"
             android:parentActivityName=".MainActivity" />
 
