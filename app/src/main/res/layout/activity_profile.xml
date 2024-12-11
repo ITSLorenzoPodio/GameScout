@@ -22,20 +22,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/aboutToolbar">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
+            <!-- Profile Image -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/profileImage"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="32dp"
                 app:cardBackgroundColor="#f5739f"
                 app:cardCornerRadius="100dp"
-                app:cardElevation="8dp">
+                app:cardElevation="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/initialLetter"
@@ -45,287 +47,291 @@
                     android:textColor="#000000"
                     android:textSize="80sp"
                     android:textStyle="bold" />
-
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:textColor="@android:color/white"
                 android:textSize="28sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profileImage" />
 
             <TextView
                 android:id="@+id/userBio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="Android Developer &amp; Tech Enthusiast"
+                android:text="@string/job"
                 android:textColor="#E0E0E0"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userName" />
 
+            <!-- Statistics Card -->
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
+                android:id="@+id/statsCard"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="24dp"
                 app:cardBackgroundColor="#2A2A2A"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userBio">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/statsTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Statistiche"
+                        android:text="@string/ProfileStats"
                         android:textColor="@android:color/white"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/likedGamesLabel"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:orientation="horizontal">
+                        android:text="@string/LikedGames"
+                        android:textColor="#E0E0E0"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toStartOf="@id/dislikedGamesLabel"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/statsTitle" />
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/projectsCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="15"
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@id/likedGamesLabel"
+                        app:layout_constraintStart_toStartOf="@id/likedGamesLabel"
+                        app:layout_constraintTop_toBottomOf="@id/likedGamesLabel" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Giochi piaciuti"
-                                android:textColor="#E0E0E0"
-                                android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/dislikedGamesLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/DislikedGames"
+                        android:textColor="#E0E0E0"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toStartOf="@id/contributionsLabel"
+                        app:layout_constraintStart_toEndOf="@id/likedGamesLabel"
+                        app:layout_constraintTop_toTopOf="@id/likedGamesLabel" />
 
-                            <TextView
-                                android:id="@+id/projectsCount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="15"
-                                android:textColor="@android:color/white"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
+                    <TextView
+                        android:id="@+id/followersCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1.2K"
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@id/dislikedGamesLabel"
+                        app:layout_constraintStart_toStartOf="@id/dislikedGamesLabel"
+                        app:layout_constraintTop_toBottomOf="@id/dislikedGamesLabel" />
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/contributionsLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/SeenGames"
+                        android:textColor="#E0E0E0"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/dislikedGamesLabel"
+                        app:layout_constraintTop_toTopOf="@id/likedGamesLabel" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Giochi schifati"
-                                android:textColor="#E0E0E0"
-                                android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/contributionsCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1.2k"
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@id/contributionsLabel"
+                        app:layout_constraintStart_toStartOf="@id/contributionsLabel"
+                        app:layout_constraintTop_toBottomOf="@id/contributionsLabel" />
 
-                            <TextView
-                                android:id="@+id/followersCount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="1.2K"
-                                android:textColor="@android:color/white"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Contributi"
-                                android:textColor="#E0E0E0"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/contributionsCount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="1.2k"
-                                android:textColor="@android:color/white"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Friends Card -->
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
+                android:id="@+id/friendsCard"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="#2A2A2A"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/statsCard"
+                app:layout_constraintBottom_toBottomOf="parent">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/friendsTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Amici"
+                        android:text="@string/ProfileFriends"
                         android:textColor="@android:color/white"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                    <!-- Nothing -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/nothingImage"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_marginTop="16dp"
-                        android:orientation="horizontal"
-                        android:padding="8dp">
+                        app:cardCornerRadius="30dp"
+                        app:cardElevation="4dp"
+                        app:layout_constraintEnd_toStartOf="@id/parisImage"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/friendsTitle">
 
-                        <!-- Nothing -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/nothing" />
+                    </androidx.cardview.widget.CardView>
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                app:cardCornerRadius="30dp"
-                                app:cardElevation="4dp">
+                    <TextView
+                        android:id="@+id/nothingName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/Nothing"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@id/nothingImage"
+                        app:layout_constraintStart_toStartOf="@id/nothingImage"
+                        app:layout_constraintTop_toBottomOf="@id/nothingImage" />
 
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/nothing" />
-                            </androidx.cardview.widget.CardView>
+                    <!-- Paris -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/parisImage"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        app:cardCornerRadius="30dp"
+                        app:cardElevation="4dp"
+                        app:layout_constraintEnd_toStartOf="@id/gionataImage"
+                        app:layout_constraintStart_toEndOf="@id/nothingImage"
+                        app:layout_constraintTop_toTopOf="@id/nothingImage">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Nothing"
-                                android:textColor="@android:color/white"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/parisi_presentation" />
+                    </androidx.cardview.widget.CardView>
 
-                        <!-- Paris -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/parisName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/LorenzoParisi"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@id/parisImage"
+                        app:layout_constraintStart_toStartOf="@id/parisImage"
+                        app:layout_constraintTop_toBottomOf="@id/parisImage" />
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                app:cardCornerRadius="30dp"
-                                app:cardElevation="4dp">
+                    <!-- Gionata -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/gionataImage"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        app:cardCornerRadius="30dp"
+                        app:cardElevation="4dp"
+                        app:layout_constraintEnd_toStartOf="@id/podImage"
+                        app:layout_constraintStart_toEndOf="@id/parisImage"
+                        app:layout_constraintTop_toTopOf="@id/nothingImage">
 
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/parisi_presentation" />
-                            </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_1" />
+                    </androidx.cardview.widget.CardView>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Paris"
-                                android:textColor="@android:color/white"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                    <TextView
+                        android:id="@+id/gionataName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/Friend"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@id/gionataImage"
+                        app:layout_constraintStart_toStartOf="@id/gionataImage"
+                        app:layout_constraintTop_toBottomOf="@id/gionataImage" />
 
-                        <!-- Gionata -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                    <!-- Pod -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/podImage"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        app:cardCornerRadius="30dp"
+                        app:cardElevation="4dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/gionataImage"
+                        app:layout_constraintTop_toTopOf="@id/nothingImage">
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                app:cardCornerRadius="30dp"
-                                app:cardElevation="4dp">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/podio_presentation" />
+                    </androidx.cardview.widget.CardView>
 
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/img_1" />
-                            </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/podName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/LorenzoPodio"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@id/podImage"
+                        app:layout_constraintStart_toStartOf="@id/podImage"
+                        app:layout_constraintTop_toBottomOf="@id/podImage" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Gionata"
-                                android:textColor="@android:color/white"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <!-- Pod -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                app:cardCornerRadius="30dp"
-                                app:cardElevation="4dp">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/podio_presentation" />
-                            </androidx.cardview.widget.CardView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Pod"
-                                android:textColor="@android:color/white"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
-        </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundGrey"
-    android:orientation="vertical">
+    android:background="@color/backgroundGrey">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/settingsToolbar"
@@ -13,52 +12,57 @@
         android:background="@color/backgroundGrey"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextColor="@color/white"
-        />
+        app:titleTextColor="@color/white" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+    <Button
+        android:id="@+id/notificationButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/buttonGrey"
+        android:text="@string/Setting1"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settingsToolbar" />
 
-        <Button
-            android:id="@+id/notificationButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/buttonGrey"
-            android:layout_marginTop="8dp"
-            android:text="Notifications"
-            android:textColor="@color/white" />
+    <Button
+        android:id="@+id/accountButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/buttonGrey"
+        android:text="@string/Setting2"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/notificationButton"
+        app:layout_constraintStart_toStartOf="@id/notificationButton"
+        app:layout_constraintTop_toBottomOf="@id/notificationButton" />
 
-        <Button
-            android:id="@+id/accountButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/buttonGrey"
-            android:layout_marginTop="8dp"
-            android:text="Account"
-            android:textColor="@color/white"/>
+    <Button
+        android:id="@+id/privacyButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/buttonGrey"
+        android:text="@string/Setting3"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/notificationButton"
+        app:layout_constraintStart_toStartOf="@id/notificationButton"
+        app:layout_constraintTop_toBottomOf="@id/accountButton" />
 
-        <Button
-            android:id="@+id/privacyButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/buttonGrey"
-            android:layout_marginTop="8dp"
-            android:text="Privacy"
-            android:textColor="@color/white"/>
+    <Button
+        android:id="@+id/helpButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/buttonGrey"
+        android:text="@string/Setting4"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/notificationButton"
+        app:layout_constraintStart_toStartOf="@id/notificationButton"
+        app:layout_constraintTop_toBottomOf="@id/privacyButton" />
 
-        <Button
-            android:id="@+id/helpButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/buttonGrey"
-            android:layout_marginTop="8dp"
-            android:text="Help"
-            android:textColor="@color/white"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

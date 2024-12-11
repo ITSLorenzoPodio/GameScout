@@ -4,4 +4,25 @@
     <string name="logo">Logo</string>
     <string name="score">"Score: "</string>
     <string name="price">"€"</string>
+    <string name="FabioRecchia">OneFabio</string>
+    <string name="LorenzoPodio">Pod</string>
+    <string name="LorenzoParisi">Paris</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Accedi</string>
+    <string name="register">Registrati</string>
+    <string name="job">Android Developer</string>
+    <string name="ProfileStats">Statistiche</string>
+    <string name="LikedGames">Giochi piaciuti</string>
+    <string name="DislikedGames">Giochi schifati</string>
+    <string name="SeenGames">Giochi votati</string>
+    <string name="ProfileFriends">Amici</string>
+    <string name="Nothing">Nothing</string>
+    <string name="Friend">Gionata</string>
+    <string name="Setting1">Notifications</string>
+    <string name="Setting2">Account</string>
+    <string name="Setting3">Privacy</string>
+    <string name="Setting4">Help</string>
+    <string name="Next">Avanti</string>
+    <string name="gameimage">Current game\'s image\n</string>
 </resources>
