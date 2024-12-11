@@ -7,24 +7,30 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.gs.MainActivity
 import com.example.gs.R
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class LoadingActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
     private lateinit var gamesList: List<HomeFragment.Game>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.loading_screen)
 
-        // Get the email from the previous activity
-        val userEmail = intent.getStringExtra("USER_EMAIL")
+        auth = FirebaseAuth.getInstance()
 
-        // Se l'email è disponibile, aggiorna l'header e procedi con il caricamento
-        userEmail?.let { email ->
-            fetchGamesFromFirebase(email)  // Passa l'email al metodo fetchGamesFromFirebase
+        // Controlla se l'utente è già autenticato
+        if (auth.currentUser != null) {
+            // Se l'utente è autenticato, procedi con il caricamento dei dati
+            fetchGamesFromFirebase(auth.currentUser?.email ?: "")
+        } else {
+            // Se l'utente non è autenticato, vai alla pagina di login
+            startActivity(Intent(this, AuthActivity::class.java))
+            finish()
         }
     }
 
@@ -46,8 +52,8 @@ class LoadingActivity : AppCompatActivity() {
                     .split(" ")
                     .joinToString(" ") { it.capitalize() }
 
-                // Passa tutti i dati necessari al MainActivity
-                val intent = Intent(this@LoadingActivity, AuthActivity::class.java).apply {
+                // Va direttamente al MainActivity con i dati caricati
+                val intent = Intent(this@LoadingActivity, MainActivity::class.java).apply {
                     putParcelableArrayListExtra("GAMES_LIST", ArrayList(tempGamesList))
                     putExtra("USER_EMAIL", userEmail)
                     putExtra("USER_NAME", userName)
@@ -58,8 +64,8 @@ class LoadingActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // In caso di errore, passa comunque i dati dell'utente
-                val intent = Intent(this@LoadingActivity, AuthActivity::class.java).apply {
+                // In caso di errore, passa comunque al MainActivity
+                val intent = Intent(this@LoadingActivity, MainActivity::class.java).apply {
                     putExtra("USER_EMAIL", userEmail)
                     putExtra("USER_NAME", userEmail.split("@")[0].capitalize())
                 }
