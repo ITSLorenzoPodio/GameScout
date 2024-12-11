@@ -51,7 +51,7 @@ class ThorActivity : AppCompatActivity() {
             if (viewPager.currentItem < tutorialPages.size - 1) {
                 viewPager.currentItem++
             } else {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, LoadingActivity::class.java))
                 finish()
             }
         }

@@ -145,7 +145,7 @@ class AuthActivity : AppCompatActivity() {
         val intent = if (isNewUser) {
             Intent(this, ThorActivity::class.java)
         } else {
-            Intent(this, MainActivity::class.java)
+            Intent(this, LoadingActivity::class.java)
         }
         intent.putExtra("USER_EMAIL", auth.currentUser?.email)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)

@@ -16,14 +16,14 @@
             android:name=".pages.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".pages.AuthActivity"
+            android:name=".pages.LoadingActivity"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
             android:parentActivityName=".MainActivity" />
 
         <activity
-            android:name=".pages.LoadingActivity"
+            android:name=".pages.AuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
