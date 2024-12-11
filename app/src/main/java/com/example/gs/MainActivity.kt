@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
     lateinit var viewPager: ViewPager2
     private lateinit var pagesAdapter: PagesAdapter
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
 
         // Initialize DrawerLayout
         drawerLayout = findViewById(R.id.drawerLayout)
-        val navigationView = findViewById<NavigationView>(R.id.navigationView)
+        navigationView = findViewById(R.id.navigationView)
         navigationView.setNavigationItemSelectedListener(this)
 
         // Setup toolbar clicks
@@ -43,6 +45,8 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
+        // Aggiorna l'header con i dati dell'utente
+        updateNavigationHeader()
 
         // Retrieve games list from intent
         val gamesList = intent.getParcelableArrayListExtra<HomeFragment.Game>("GAMES_LIST")
@@ -65,6 +69,23 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
         }.attach()
 
         tabLayout.setTabIconTint(ContextCompat.getColorStateList(this, R.color.tab_icon_color))
+    }
+
+    private fun updateNavigationHeader() {
+        val headerView = navigationView.getHeaderView(0)
+
+        // Recupera i dati dell'utente dall'intent
+        val userEmail = intent.getStringExtra("USER_EMAIL")
+        val userName = intent.getStringExtra("USER_NAME")
+
+        // Aggiorna le TextView nell'header
+        headerView?.let {
+            val userNameTextView: TextView = it.findViewById(R.id.userName)
+            val userEmailTextView: TextView = it.findViewById(R.id.userEmail)
+
+            userName?.let { name -> userNameTextView.text = name }
+            userEmail?.let { email -> userEmailTextView.text = email }
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -113,6 +134,7 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
             super.onBackPressed()
         }
     }
+
     fun onCategoriesSelected(categories: List<String>) {
         val homeFragment = supportFragmentManager.fragments
             .filterIsInstance<HomeFragment>()

@@ -28,7 +28,7 @@ class AuthActivity : AppCompatActivity() {
 
         // Controlla se l'utente è già autenticato
         if (auth.currentUser != null) {
-            navigateToMainActivity()
+            navigateToMainActivity(isNewUser = false)
             return
         }
 
@@ -92,16 +92,14 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun signIn(email: String, password: String) {
-        // Mostra un indicatore di caricamento (puoi implementare uno spinner)
         loginButton.isEnabled = false
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 loginButton.isEnabled = true
                 if (task.isSuccessful) {
-                    navigateToMainActivity()
+                    navigateToMainActivity(isNewUser = false)
                 } else {
-                    // Gestisci gli errori specifici di Firebase
                     val errorMessage = when (task.exception) {
                         is com.google.firebase.auth.FirebaseAuthInvalidCredentialsException ->
                             "Credenziali non valide"
@@ -115,25 +113,22 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun createAccount(email: String, password: String) {
-        // Mostra un indicatore di caricamento
         registerButton.isEnabled = false
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 registerButton.isEnabled = true
                 if (task.isSuccessful) {
-                    // Invia email di verifica
                     auth.currentUser?.sendEmailVerification()
                         ?.addOnCompleteListener { verificationTask ->
                             if (verificationTask.isSuccessful) {
                                 Toast.makeText(baseContext,
                                     "Registrazione completata. Controlla la tua email per la verifica.",
                                     Toast.LENGTH_LONG).show()
-                                navigateToMainActivity()
+                                navigateToMainActivity(isNewUser = true)
                             }
                         }
                 } else {
-                    // Gestisci gli errori specifici di Firebase
                     val errorMessage = when (task.exception) {
                         is com.google.firebase.auth.FirebaseAuthUserCollisionException ->
                             "Email già registrata"
@@ -146,9 +141,13 @@ class AuthActivity : AppCompatActivity() {
             }
     }
 
-    private fun navigateToMainActivity() {
-        // Rimuovi il controllo ricorsivo errato
-        val intent = Intent(this, LoadingActivity::class.java)
+    private fun navigateToMainActivity(isNewUser: Boolean) {
+        val intent = if (isNewUser) {
+            Intent(this, ThorActivity::class.java)
+        } else {
+            Intent(this, MainActivity::class.java)
+        }
+        intent.putExtra("USER_EMAIL", auth.currentUser?.email)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()

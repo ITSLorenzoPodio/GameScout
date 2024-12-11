@@ -11,13 +11,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.example.gs.MainActivity
 import com.example.gs.R
 
 class ThorActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var btnNext: Button
 
-    // Dati per le schermate del tutorial
     private val tutorialPages = listOf(
         TutorialPage(
             R.drawable.tutorial1,
@@ -43,24 +43,19 @@ class ThorActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPagerTutorial)
         btnNext = findViewById(R.id.btnNext)
 
-        // Configurazione dell'adapter per il ViewPager
         val tutorialAdapter = TutorialPagerAdapter(tutorialPages)
         viewPager.adapter = tutorialAdapter
 
-        // Configurazione bottone
         btnNext.text = "Avanti"
         btnNext.setOnClickListener {
-            // Se non siamo all'ultima pagina, vai avanti
             if (viewPager.currentItem < tutorialPages.size - 1) {
                 viewPager.currentItem++
             } else {
-                // All'ultima pagina, vai a LoadingActivity
-                startActivity(Intent(this, AuthActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         }
 
-        // Aggiorna il testo del bottone in base alla pagina corrente
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 btnNext.text = if (position == tutorialPages.size - 1) "Inizia" else "Avanti"
@@ -69,14 +64,12 @@ class ThorActivity : AppCompatActivity() {
     }
 }
 
-// Classe per rappresentare una pagina del tutorial
 data class TutorialPage(
     val imageResId: Int,
     val title: String,
     val description: String
 )
 
-// Adapter per il ViewPager
 class TutorialPagerAdapter(private val pages: List<TutorialPage>) :
     RecyclerView.Adapter<TutorialPagerAdapter.TutorialViewHolder>() {
 
