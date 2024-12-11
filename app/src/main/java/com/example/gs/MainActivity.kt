@@ -19,6 +19,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.example.gs.SettingsActivity
 import com.example.gs.pages.AboutActivity
 import com.example.gs.pages.AuthActivity
+import com.example.gs.pages.ProfileActivity
 import com.google.firebase.auth.FirebaseAuth
 
 interface GameCollectionListener {
@@ -82,8 +83,13 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
         headerView?.let {
             val userNameTextView: TextView = it.findViewById(R.id.userName)
             val userEmailTextView: TextView = it.findViewById(R.id.userEmail)
+            val initialTextView: TextView = it.findViewById(R.id.initialLetter)
 
-            userName?.let { name -> userNameTextView.text = name }
+            userName?.let { name ->
+                userNameTextView.text = name
+                // Imposta l'iniziale maiuscola
+                initialTextView.text = name.firstOrNull()?.uppercase() ?: "U"
+            }
             userEmail?.let { email -> userEmailTextView.text = email }
         }
     }
@@ -91,7 +97,10 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_profile -> {
-                // TODO
+                val intent = Intent(this, ProfileActivity::class.java)
+                // Passiamo il nome utente dall'intent originale al ProfileActivity
+                intent.putExtra("USER_NAME", getIntent().getStringExtra("USER_NAME"))
+                startActivity(intent)
             }
             R.id.nav_settings -> {
                 val intent = Intent(this, SettingsActivity::class.java)
