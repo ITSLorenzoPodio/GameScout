@@ -70,7 +70,7 @@ class LoadingActivity : AppCompatActivity() {
                 finish()
             }
 
-            // Gestisci eventuali errori 
+            // Gestisci eventuali errori di recupero dei dati
             override fun onCancelled(error: DatabaseError) {
                 // In caso di errore, passa comunque alla prossima activity
                 val nextActivity = if (isNewUser) {
