@@ -18,6 +18,7 @@ class ThorActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var btnNext: Button
 
+    // Lista di pagine del tutorial
     private val tutorialPages = listOf(
         TutorialPage(
             R.drawable.tutorial1,
@@ -36,6 +37,7 @@ class ThorActivity : AppCompatActivity() {
         )
     )
 
+    // Pagina del tutorial
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_thor)
@@ -46,6 +48,7 @@ class ThorActivity : AppCompatActivity() {
         val tutorialAdapter = TutorialPagerAdapter(tutorialPages)
         viewPager.adapter = tutorialAdapter
 
+        // Gestisci il pulsante "Avanti"
         btnNext.text = "Avanti"
         btnNext.setOnClickListener {
             if (viewPager.currentItem < tutorialPages.size - 1) {
@@ -56,6 +59,7 @@ class ThorActivity : AppCompatActivity() {
             }
         }
 
+        // Gestisci il cambio di pagina nel ViewPager per aggiornare il testo del pulsante
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 btnNext.text = if (position == tutorialPages.size - 1) "Inizia" else "Avanti"
@@ -64,12 +68,14 @@ class ThorActivity : AppCompatActivity() {
     }
 }
 
+// Classe per rappresentare una pagina del tutorial
 data class TutorialPage(
     val imageResId: Int,
     val title: String,
     val description: String
 )
 
+// Adapter per il ViewPager del tutorial
 class TutorialPagerAdapter(private val pages: List<TutorialPage>) :
     RecyclerView.Adapter<TutorialPagerAdapter.TutorialViewHolder>() {
 

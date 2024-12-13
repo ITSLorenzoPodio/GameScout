@@ -19,22 +19,22 @@ class CategoryAdapter(
         val textView: TextView = view.findViewById(R.id.categoryTextView)
     }
 
+    // Crea una nuova istanza del ViewHolder per ogni elemento della lista
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_category, parent, false)
         return CategoryViewHolder(view)
     }
 
+    // Popola il ViewHolder con i dati per ogni elemento della lista
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = categories[position]
         holder.textView.text = category
 
-        // Update view based on selection state
-        if (selectedCategories.contains(category)) {
-            holder.itemView.setBackgroundResource(R.color.selected_category_background)
-            holder.textView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.cardBackground))
-        }
+        // aggiorna lo stato di selezione della categoria
+        updateViewState(holder, category)
 
+        // Quando l'utente clicca su una categoria, aggiorna lo stato di selezione
         holder.itemView.setOnClickListener {
             if (selectedCategories.contains(category)) {
                 selectedCategories.remove(category)
@@ -46,7 +46,36 @@ class CategoryAdapter(
         }
     }
 
+    // Aggiorna lo stato di selezione della categoria
+    private fun updateViewState(holder: CategoryViewHolder, category: String) {
+        val isSelected = selectedCategories.contains(category)
+
+        // Setta il colore di sfondo in base alla selezione
+        holder.itemView.setBackgroundResource(
+            if (isSelected) R.color.selected_category_background
+            else android.R.color.transparent
+        )
+
+        // Setta il  colore del testo in base alla selezione
+        holder.textView.setTextColor(
+            ContextCompat.getColor(
+                holder.itemView.context,
+                if (isSelected) R.color.cardBackground
+                else R.color.white
+
+            )
+        )
+    }
+
+    // Restituisce il numero di elementi nella lista
     override fun getItemCount() = categories.size
 
+    // Restituisce la lista di categorie selezionate
     fun getSelectedCategories(): List<String> = selectedCategories.toList()
+
+    // Rimuove tutte le selezioni
+    fun clearSelections() {
+        selectedCategories.clear()
+        notifyDataSetChanged()
+    }
 }

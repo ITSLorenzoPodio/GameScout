@@ -69,6 +69,7 @@ class AuthActivity : AppCompatActivity() {
             return false
         }
 
+        // Validazione email (formato valido)
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailEditText.error = "Inserisci un'email valida"
             emailEditText.requestFocus()
@@ -82,6 +83,7 @@ class AuthActivity : AppCompatActivity() {
             return false
         }
 
+        // Validazione password (minimo 6 caratteri)
         if (password.length < 6) {
             passwordEditText.error = "La password deve essere lunga almeno 6 caratteri"
             passwordEditText.requestFocus()
@@ -94,6 +96,7 @@ class AuthActivity : AppCompatActivity() {
     private fun signIn(email: String, password: String) {
         loginButton.isEnabled = false
 
+        // Autenticazione con Firebase Authentication
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 loginButton.isEnabled = true
@@ -115,6 +118,7 @@ class AuthActivity : AppCompatActivity() {
     private fun createAccount(email: String, password: String) {
         registerButton.isEnabled = false
 
+        // Creazione di un nuovo utente con Firebase Authentication
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 registerButton.isEnabled = true
@@ -136,11 +140,13 @@ class AuthActivity : AppCompatActivity() {
                             "Password troppo debole"
                         else -> "Registrazione fallita: ${task.exception?.localizedMessage}"
                     }
+                    // Mostra un messaggio di errore appropriato
                     Toast.makeText(baseContext, errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
+    // Navigazione alla MainActivity
     private fun navigateToMainActivity(isNewUser: Boolean) {
         val intent = if (isNewUser) {
             Intent(this, ThorActivity::class.java)

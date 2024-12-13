@@ -49,6 +49,7 @@ class SwipeableCardView : FrameLayout {
         const val RESET_ANIMATION_DURATION = 200L // Duration for reset animations
     }
 
+    // Inizializza la view
     private fun init() {
         with(this) {
             originalX = x
@@ -76,7 +77,6 @@ class SwipeableCardView : FrameLayout {
             else -> false
         }
     }
-
 
     /**
      * Handles touch events for the card view.

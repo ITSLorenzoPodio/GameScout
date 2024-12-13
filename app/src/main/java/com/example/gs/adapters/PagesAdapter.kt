@@ -7,8 +7,11 @@ import com.example.gs.pages.CollectionFragment
 import com.example.gs.pages.HomeFragment
 import com.example.gs.pages.SearchFragment
 
+// Adapter per gestire le pagine del ViewPager
 class PagesAdapter(
+    // costruttore della classe
     private val fa: FragmentActivity,
+    // Lista di giochi da passare al fragment HomeFragment
     private val gamesList: List<HomeFragment.Game>? = null
 ) : FragmentStateAdapter(fa) {
 
@@ -16,8 +19,10 @@ class PagesAdapter(
 
     fun getCollectionFragment(): CollectionFragment = collectionFragment
 
+    // Numero di pagine
     override fun getItemCount(): Int = 3
 
+    // Crea i fragment
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> {

@@ -9,10 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gs.MainActivity
 import com.example.gs.R
@@ -91,17 +88,13 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupCategoriesRecyclerView() {
-        val spanCount = 2
-        categoriesRecyclerView.layoutManager = GridLayoutManager(context, spanCount)
         categoryAdapter = CategoryAdapter(categories) { selectedCategories ->
-            // Immediately notify MainActivity of the selected categories
             (activity as? MainActivity)?.onCategoriesSelected(selectedCategories)
         }
         categoriesRecyclerView.adapter = categoryAdapter
     }
 
     private fun setupRecentSearchesRecyclerView() {
-        recentSearchesRecyclerView.layoutManager = LinearLayoutManager(context)
         updateRecentSearchesAdapter()
     }
 
@@ -134,5 +127,9 @@ class SearchFragment : Fragment() {
             recentSearches.clear()
             recentSearches.addAll(prefs.getStringSet("recent_searches", setOf()) ?: setOf())
         }
+    }
+
+    companion object {
+        fun newInstance() = SearchFragment()
     }
 }

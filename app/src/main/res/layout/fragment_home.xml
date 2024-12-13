@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,30 +10,33 @@
 
     <FrameLayout
         android:id="@+id/card_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/buttons_container"
-
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/container_background"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:background="@drawable/container_background"
-        />
+        app:layout_constraintBottom_toTopOf="@id/buttons_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/buttons_container"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:padding="16dp"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/skipButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:backgroundTint="@color/backgroundGreen"
-            android:background="@drawable/baseline_thumb_down_24" />
+            android:background="@drawable/baseline_thumb_down_24"
+            android:backgroundTint="@color/backgroundGreen" />
 
         <Space
             android:layout_width="100dp"
@@ -42,9 +46,9 @@
             android:id="@+id/likeButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:backgroundTint="@color/backgroundGreen"
-            android:background="@drawable/round_thumb_up_24" />
+            android:background="@drawable/round_thumb_up_24"
+            android:backgroundTint="@color/backgroundGreen" />
 
     </LinearLayout>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

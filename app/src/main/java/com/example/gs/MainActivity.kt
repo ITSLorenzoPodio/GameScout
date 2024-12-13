@@ -1,11 +1,13 @@
 package com.example.gs
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -32,35 +34,43 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
 
+    // Perché val gamesList = intent.getParcelableArrayListExtra<HomeFragment.Game>("GAMES_LIST") è deprecato
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize DrawerLayout
+        // Menu a sinistra
         drawerLayout = findViewById(R.id.drawerLayout)
         navigationView = findViewById(R.id.navigationView)
         navigationView.setNavigationItemSelectedListener(this)
 
-        // Setup toolbar clicks
-        findViewById<ImageButton>(R.id.profileButton).setOnClickListener {
+        // Quando clicchi il tasto menu in alto a sinistra si apre il menu laterale
+        findViewById<ImageButton>(R.id.menuButton).setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        // Aggiorna l'header con i dati dell'utente
+        // Aggiorna l'header nel menu laterale con i dati dell'utente ("Immagine", Nome e Email)
         updateNavigationHeader()
 
-        // Retrieve games list from intent
-        val gamesList = intent.getParcelableArrayListExtra<HomeFragment.Game>("GAMES_LIST")
+        // val gamesList = intent.getParcelableArrayListExtra<HomeFragment.Game>("GAMES_LIST") deprecato
+        // Prendo la lista di giochi dall'intent (LoadingActivity)
+        val gamesList = intent.getParcelableArrayListExtra("GAMES_LIST", HomeFragment.Game::class.java)
 
-        // ViewPager
+        // ViewPager per le pagine side by side
         viewPager = findViewById(R.id.viewPager)
+        // Non permettiamo lo swipe tra le pagine
         viewPager.isUserInputEnabled = false
+        // Passiamo la lista al pages adapter
+        // I dati devono essere passati al Fragment prima che venga creato e mostrato
+        // Usando il Bundle, i dati sopravvivono alle ricreazioni del Fragment
         pagesAdapter = PagesAdapter(this, gamesList)
         viewPager.adapter = pagesAdapter
 
-        // TabLayout
+        // TabLayout (La hotbar) per navigare tra le pagine
         val tabLayout = findViewById<TabLayout>(R.id.tabsLayout)
 
+        // Imposta il TabLayout con il ViewPager per navigare tra le pagine
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
                 0 -> tab.setIcon(R.drawable.home_tab)
@@ -69,9 +79,11 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
             }
         }.attach()
 
+        // Imposta colori per le icone del TabLayout
         tabLayout.setTabIconTint(ContextCompat.getColorStateList(this, R.color.tab_icon_color))
     }
 
+    // Aggiorna l'header nel menu laterale con i dati dell'utente ("Immagine", Nome e Email)
     private fun updateNavigationHeader() {
         val headerView = navigationView.getHeaderView(0)
 
@@ -79,21 +91,25 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
         val userEmail = intent.getStringExtra("USER_EMAIL")
         val userName = intent.getStringExtra("USER_NAME")
 
-        // Aggiorna le TextView nell'header
+        // Imposta i dati nell'header del menu laterale
         headerView?.let {
             val userNameTextView: TextView = it.findViewById(R.id.userName)
             val userEmailTextView: TextView = it.findViewById(R.id.userEmail)
             val initialTextView: TextView = it.findViewById(R.id.initialLetter)
 
+            // let è una funzione che viene eseguita solo se userName non è nullo
+            // Imposta il nome dell'utente
             userName?.let { name ->
                 userNameTextView.text = name
-                // Imposta l'iniziale maiuscola
+                // Imposta l'iniziale maiuscola del nome utente
                 initialTextView.text = name.firstOrNull()?.uppercase() ?: "U"
             }
+            // Imposta l'email dell'utente
             userEmail?.let { email -> userEmailTextView.text = email }
         }
     }
 
+    // Quando clicchiamo su un'opzione del menu laterale si apre una nuova activity
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_profile -> {
@@ -136,14 +152,16 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
         return true
     }
 
+    // Quando premiamo indietro si chiude il menu laterale
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            super.onBackPressedDispatcher.onBackPressed()
         }
     }
 
+    //
     fun onCategoriesSelected(categories: List<String>) {
         val homeFragment = supportFragmentManager.fragments
             .filterIsInstance<HomeFragment>()
@@ -152,6 +170,7 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
         homeFragment?.setSelectedCategories(categories)
     }
 
+    //
     fun onSearchSubmitted(searchQuery: String) {
         val currentFragment = supportFragmentManager.findFragmentByTag("f0")
         if (currentFragment is HomeFragment) {
@@ -160,12 +179,12 @@ class MainActivity : AppCompatActivity(), GameCollectionListener, NavigationView
         viewPager.currentItem = 0
     }
 
+    // Quando aggiungiamo un gioco alla collezione
     override fun onGameSaved(game: HomeFragment.Game, isLiked: Boolean) {
         try {
             pagesAdapter.getCollectionFragment().addGame(game, isLiked)
         } catch (e: Exception) {
             println("Error saving game: ${e.message}")
-            e.printStackTrace()
         }
     }
 }

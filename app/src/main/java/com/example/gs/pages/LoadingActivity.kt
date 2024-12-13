@@ -15,12 +15,14 @@ import com.google.firebase.database.ValueEventListener
 class LoadingActivity : AppCompatActivity() {
     private lateinit var gamesList: List<HomeFragment.Game>
 
+    // Aggiungi una variabile per il nome dell'utente
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.loading_screen)
 
         // Get the email from the previous activity
         val userEmail = intent.getStringExtra("USER_EMAIL")
+
         // Verifica se l'utente è nuovo
         val isNewUser = intent.getBooleanExtra("IS_NEW_USER", false)
 
@@ -30,10 +32,12 @@ class LoadingActivity : AppCompatActivity() {
         }
     }
 
+    // Carica i giochi dal database di Firebase
     private fun fetchGamesFromFirebase(userEmail: String, isNewUser: Boolean) {
         val database = FirebaseDatabase.getInstance("https://gamescout-e5aab-default-rtdb.europe-west1.firebasedatabase.app/")
         val gamesRef = database.getReference("games")
 
+        // Aggiungi un listener per recuperare tutti i giochi
         gamesRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val tempGamesList = mutableListOf<HomeFragment.Game>()
@@ -66,6 +70,7 @@ class LoadingActivity : AppCompatActivity() {
                 finish()
             }
 
+            // Gestisci eventuali errori 
             override fun onCancelled(error: DatabaseError) {
                 // In caso di errore, passa comunque alla prossima activity
                 val nextActivity = if (isNewUser) {

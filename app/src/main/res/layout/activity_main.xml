@@ -30,7 +30,7 @@
                 android:layout_height="match_parent">
 
                 <ImageButton
-                    android:id="@+id/profileButton"
+                    android:id="@+id/menuButton"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:background="?attr/selectableItemBackgroundBorderless"

@@ -49,11 +49,13 @@ class HomeFragment : Fragment(), CategorySelectionListener {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
+        // Add 'savedInstanceState' parameter here to handle configuration changes (e.g., screen rotation)
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    // Handle configuration changes (e.g., screen rotation)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -74,18 +76,20 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         }
     }
 
+    // quando viene selezionata una categoria
     override fun onCategorySelected(category: String?) {
-        println("HomeFragment received category: $category")
-        println("Total games before filtering: ${allGames.size}")
 
         currentCategory = category
         cardContainer.removeAllViews()
         currentIndex = 0
 
+        // Clear the filtered games list
         filteredGames.clear()
         if (category == null) {
+            // If no category is selected, show all games
             filteredGames.addAll(allGames)
         } else {
+            // Otherwise, filter the games by the selected category
             filteredGames.addAll(allGames.filter { game ->
                 // Split genres and trim whitespace
                 val gameGenres = game.genre.split(",").map { it.trim() }
@@ -94,13 +98,12 @@ class HomeFragment : Fragment(), CategorySelectionListener {
             })
         }
 
-        println("Filtered games count: ${filteredGames.size}")
-
         if (filteredGames.isNotEmpty()) {
             addNextCard()
         }
     }
 
+    // Imposta i listener per i bottoni
     private fun setupButtons() {
         likeButton.setOnClickListener {
             val topCard = cardContainer.getChildAt(cardContainer.childCount - 1) as? SwipeableCardView
@@ -118,6 +121,7 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         filterGames()
     }
 
+    // Filtra i giochi in base alle categorie selezionate
     private fun filterGames() {
         filteredGames.clear()
 
@@ -141,9 +145,8 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         }
     }
 
+    // Gestisci la submissione della ricerca
     fun onSearchSubmitted(searchQuery: String) {
-        println("HomeFragment received search query: $searchQuery")
-
         cardContainer.removeAllViews()
         currentIndex = 0
 
@@ -156,13 +159,12 @@ class HomeFragment : Fragment(), CategorySelectionListener {
             })
         }
 
-        println("Filtered games count: ${filteredGames.size}")
-
         if (filteredGames.isNotEmpty()) {
             addNextCard()
         }
     }
 
+    // Aggiungi la prossima carta al contenitore
     private fun addNextCard() {
         if (currentIndex >= filteredGames.size) {
             return
@@ -176,10 +178,12 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         val cardView = LayoutInflater.from(requireContext())
             .inflate(R.layout.game_card_item, cardContainer, false) as SwipeableCardView
 
+        // Carica l'immagine con Glide
         Glide.with(requireContext())
             .load(game.imageUrl)
             .into(cardView.findViewById<ImageView>(R.id.gameImage))
 
+        // Imposta i dati del gioco
         cardView.findViewById<TextView>(R.id.gameTitle).text = game.title
         cardView.findViewById<TextView>(R.id.gameGenre).text = game.genre
         cardView.findViewById<TextView>(R.id.gamePlatforms).text = game.platforms
@@ -200,6 +204,7 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         val originalPriceView = cardView.findViewById<TextView>(R.id.gameOriginalPrice)
         val currentPriceView = cardView.findViewById<TextView>(R.id.gameCurrentPrice)
 
+        // Imposta i dati del prezzo
         if (game.originalPrice == 0.0 && game.currentPrice == 0.0) {
             currentPriceView.text = "Free to Play"
             discountView.visibility = View.GONE
@@ -223,6 +228,7 @@ class HomeFragment : Fragment(), CategorySelectionListener {
             }
         }
 
+        // Imposta la carta come cliccabile e rispedisce alla pagina del negozio
         cardView.findViewById<View>(R.id.swiper).setOnClickListener {
             if (game.url.isNotEmpty()) {
                 try {
@@ -237,15 +243,14 @@ class HomeFragment : Fragment(), CategorySelectionListener {
             }
         }
 
+        // Imposta il listener per il swipe
         cardView.setOnSwipeListener(object : SwipeableCardView.OnSwipeListener {
             override fun onSwipeLeft() {
-                println("Game skipped: ${game.title}")
                 gameCollectionListener?.onGameSaved(game, false)
                 removeTopCard()
             }
 
             override fun onSwipeRight() {
-                println("Game liked: ${game.title}")
                 gameCollectionListener?.onGameSaved(game, true)
                 removeTopCard()
             }
@@ -273,6 +278,7 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         gameCollectionListener = null
     }
 
+    // Classe per rappresentare un gioco
     @Parcelize
     data class Game(
         val id: Int = 0,

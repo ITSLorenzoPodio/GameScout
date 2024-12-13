@@ -11,11 +11,11 @@ class AboutActivity : AppCompatActivity() {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_about)
 
-            // Set up the toolbar
+            // imposta la toolbar
             val toolbar = findViewById<Toolbar>(R.id.aboutToolbar)
             setSupportActionBar(toolbar)
 
-            // Enable the back arrow
+            // back arrow
             supportActionBar?.apply {
                 setDisplayHomeAsUpEnabled(true)
                 setDisplayShowHomeEnabled(true)
