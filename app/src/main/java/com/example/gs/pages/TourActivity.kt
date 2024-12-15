@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gs.R
 
-class ThorActivity : AppCompatActivity() {
+class TourActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var btnNext: Button
 
@@ -39,7 +39,7 @@ class ThorActivity : AppCompatActivity() {
     // Pagina del tutorial
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_thor)
+        setContentView(R.layout.activity_tour)
 
         viewPager = findViewById(R.id.viewPagerTutorial)
         btnNext = findViewById(R.id.btnNext)

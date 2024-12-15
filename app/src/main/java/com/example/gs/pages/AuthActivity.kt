@@ -148,7 +148,7 @@ class AuthActivity : AppCompatActivity() {
     // Navigazione alla MainActivity
     private fun navigateToMainActivity(isNewUser: Boolean) {
         val intent = if (isNewUser) {
-            Intent(this, ThorActivity::class.java)
+            Intent(this, TourActivity::class.java)
         } else {
             Intent(this, LoadingActivity::class.java)
         }

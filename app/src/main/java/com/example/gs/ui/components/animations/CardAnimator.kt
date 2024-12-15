@@ -113,12 +113,6 @@ class CardAnimator(private val cardView: SwipeableCardView) {
             val cardIndex = parent.indexOfChild(cardView)
             if (cardIndex > 0) {
                 (parent.getChildAt(cardIndex - 1) as? SwipeableCardView)?.apply {
-                    // Calcola il fattore di oscuramento basato sul movimento
-                    val darknessFactor = 1 - (min(
-                        abs(moveX) / (width * Constants.SWIPE_THRESHOLD),
-                        1f
-                    ) * 0.9f)
-                    setCardDarkness(darknessFactor)
                     scaleX = Constants.SCALE_FACTOR
                     scaleY = Constants.SCALE_FACTOR
                 }
@@ -139,25 +133,9 @@ class CardAnimator(private val cardView: SwipeableCardView) {
                         .scaleY(1f)
                         .setDuration(Constants.RESET_ANIMATION_DURATION)
                         .start()
-                    setCardDarkness(0f)
                 }
             }
         }
-    }
-
-    /**
-     * Imposta l'oscuramento della carta
-     */
-    private fun SwipeableCardView.setCardDarkness(factor: Float) {
-        removeCardOverlay()
-        addView(View(context).apply {
-            setBackgroundColor(Color.BLACK)
-            alpha = factor
-            layoutParams = FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
-            )
-        })
     }
 
     /**

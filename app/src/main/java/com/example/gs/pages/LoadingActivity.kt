@@ -17,7 +17,7 @@ class LoadingActivity : AppCompatActivity() {
     // Aggiungi una variabile per il nome dell'utente
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.loading_screen)
+        setContentView(R.layout.activity_loading)
 
         // Get the email from the previous activity
         val userEmail = intent.getStringExtra("USER_EMAIL")
@@ -53,7 +53,7 @@ class LoadingActivity : AppCompatActivity() {
 
                 // Decidi dove navigare in base a isNewUser
                 val nextActivity = if (isNewUser) {
-                    ThorActivity::class.java
+                    TourActivity::class.java
                 } else {
                     MainActivity::class.java
                 }
@@ -73,7 +73,7 @@ class LoadingActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 // In caso di errore, passa comunque alla prossima activity
                 val nextActivity = if (isNewUser) {
-                    ThorActivity::class.java
+                    TourActivity::class.java
                 } else {
                     MainActivity::class.java
                 }
