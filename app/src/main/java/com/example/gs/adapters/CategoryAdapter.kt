@@ -50,19 +50,18 @@ class CategoryAdapter(
     private fun updateViewState(holder: CategoryViewHolder, category: String) {
         val isSelected = selectedCategories.contains(category)
 
-        // Setta il colore di sfondo in base alla selezione
+        // Set the background drawable based on selection state
         holder.itemView.setBackgroundResource(
-            if (isSelected) R.color.selected_category_background
-            else android.R.color.transparent
+            if (isSelected) R.drawable.category_background_selected
+            else R.drawable.category_background
         )
 
-        // Setta il  colore del testo in base alla selezione
+        // Set text color based on selection
         holder.textView.setTextColor(
             ContextCompat.getColor(
                 holder.itemView.context,
                 if (isSelected) R.color.cardBackground
                 else R.color.white
-
             )
         )
     }

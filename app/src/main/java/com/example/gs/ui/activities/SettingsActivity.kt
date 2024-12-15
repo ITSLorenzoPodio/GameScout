@@ -19,7 +19,7 @@ class SettingsActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
-            title = "Settings"
+            title = "Impostazioni"
         }
     }
 

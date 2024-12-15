@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gs.ui.activities.MainActivity
 import com.example.gs.R
+import com.example.gs.model.Game
 import com.example.gs.ui.fragments.HomeFragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -12,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class LoadingActivity : AppCompatActivity() {
-    private lateinit var gamesList: List<HomeFragment.Game>
+    private lateinit var gamesList: List<Game>
 
     // Aggiungi una variabile per il nome dell'utente
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +40,9 @@ class LoadingActivity : AppCompatActivity() {
         // Aggiungi un listener per recuperare tutti i giochi
         gamesRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val tempGamesList = mutableListOf<HomeFragment.Game>()
+                val tempGamesList = mutableListOf<Game>()
                 for (gameSnapshot in snapshot.children) {
-                    val game = gameSnapshot.getValue(HomeFragment.Game::class.java)
+                    val game = gameSnapshot.getValue(Game::class.java)
                     game?.let { tempGamesList.add(it) }
                 }
 

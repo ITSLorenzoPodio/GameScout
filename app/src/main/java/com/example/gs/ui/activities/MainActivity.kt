@@ -12,11 +12,12 @@ import com.example.gs.R
 import com.example.gs.managers.NavigationManager
 import com.example.gs.managers.UserProfileManager
 import com.example.gs.managers.ViewPagerSetup
+import com.example.gs.model.Game
 import com.example.gs.ui.fragments.HomeFragment
 import com.google.android.material.navigation.NavigationView
 
 interface GameCollectionListener {
-    fun onGameSaved(game: HomeFragment.Game, isLiked: Boolean)
+    fun onGameSaved(game: Game, isLiked: Boolean)
 }
 
 class MainActivity : AppCompatActivity(), GameCollectionListener {
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity(), GameCollectionListener {
 
         val gamesList = intent.getParcelableArrayListExtra(
             "GAMES_LIST",
-            HomeFragment.Game::class.java
+            Game::class.java
         )
 
         viewPagerSetup = ViewPagerSetup(
@@ -95,11 +96,11 @@ class MainActivity : AppCompatActivity(), GameCollectionListener {
         viewPager.currentItem = 0
     }
 
-    override fun onGameSaved(game: HomeFragment.Game, isLiked: Boolean) {
+    override fun onGameSaved(game: Game, isLiked: Boolean) {
         try {
             viewPagerSetup.getPagesAdapter().getCollectionFragment().addGame(game, isLiked)
         } catch (e: Exception) {
-            println("Error saving game: ${e.message}")
+            println("Errore salvando il gioco: ${e.message}")
         }
     }
 }

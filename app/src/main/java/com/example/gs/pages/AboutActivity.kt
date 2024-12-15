@@ -19,7 +19,7 @@ class AboutActivity : AppCompatActivity() {
             supportActionBar?.apply {
                 setDisplayHomeAsUpEnabled(true)
                 setDisplayShowHomeEnabled(true)
-                title = "About us"
+                title = "Riconoscimenti"
             }
         }
 

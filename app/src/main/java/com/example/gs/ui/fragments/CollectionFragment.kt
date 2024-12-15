@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.gs.R
+import com.example.gs.model.Game
 
 class CollectionFragment : Fragment() {
     private lateinit var likedGamesContainer: LinearLayout
@@ -20,8 +21,8 @@ class CollectionFragment : Fragment() {
     private lateinit var showMoreLikedButton: Button
     private lateinit var showMoreSkippedButton: Button
 
-    private val likedGames = mutableListOf<HomeFragment.Game>()
-    private val skippedGames = mutableListOf<HomeFragment.Game>()
+    private val likedGames = mutableListOf<Game>()
+    private val skippedGames = mutableListOf<Game>()
 
     private var isShowingAllLiked = false
     private var isShowingAllSkipped = false
@@ -50,17 +51,17 @@ class CollectionFragment : Fragment() {
         showMoreLikedButton.setOnClickListener {
             isShowingAllLiked = !isShowingAllLiked
             updateLikedGamesDisplay()
-            showMoreLikedButton.text = if (isShowingAllLiked) "Show less" else "Show more"
+            showMoreLikedButton.text = if (isShowingAllLiked) "Mostra di meno" else "Mostra di più"
         }
 
         showMoreSkippedButton.setOnClickListener {
             isShowingAllSkipped = !isShowingAllSkipped
             updateSkippedGamesDisplay()
-            showMoreSkippedButton.text = if (isShowingAllSkipped) "Show less" else "Show more"
+            showMoreSkippedButton.text = if (isShowingAllSkipped) "Mostra di meno" else "Mostra di più"
         }
     }
 
-    fun addGame(game: HomeFragment.Game, isLiked: Boolean) {
+    fun addGame(game: Game, isLiked: Boolean) {
         if (isLiked) {
             if (!likedGames.contains(game)) {
                 likedGames.add(game)
@@ -74,7 +75,7 @@ class CollectionFragment : Fragment() {
         }
     }
 
-    private fun addGameView(game: HomeFragment.Game, container: LinearLayout) {
+    private fun addGameView(game: Game, container: LinearLayout) {
         val gameView = LayoutInflater.from(context)
             .inflate(R.layout.collection_game_item, container, false)
 

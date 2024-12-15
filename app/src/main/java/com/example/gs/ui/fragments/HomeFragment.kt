@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.gs.ui.activities.GameCollectionListener
 import com.example.gs.R
+import com.example.gs.model.Game
 import com.example.gs.ui.components.SwipeableCardView
 import com.example.gs.ui.components.listeners.OnSwipeListener
 import kotlinx.parcelize.Parcelize
@@ -234,11 +235,11 @@ class HomeFragment : Fragment(), CategorySelectionListener {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(game.url))
                     startActivity(intent)
                 } catch (e: Exception) {
-                    Toast.makeText(context, "Could not open URL: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "URL non raggiungibile: ${e.message}", Toast.LENGTH_SHORT).show()
                     e.printStackTrace()
                 }
             } else {
-                Toast.makeText(context, "No URL available", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Nessun URL disponibile", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -276,21 +277,4 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         super.onDetach()
         gameCollectionListener = null
     }
-
-    // Classe per rappresentare un gioco
-    @Parcelize
-    data class Game(
-        val id: Int = 0,
-        val title: String = "",
-        val imageUrl: String = "",
-        val genre: String = "",
-        val platforms: String = "",
-        val userScore: String = "",
-        val description: String = "",
-        val originalPrice: Double = 0.0,
-        val currentPrice: Double = 0.0,
-        val discount: Double = 0.0,
-        val rating: Double = 0.0,
-        val url: String = ""
-    ) : Parcelable
 }

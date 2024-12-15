@@ -20,11 +20,11 @@ class ProfileActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
-            title = "Profile"
+            title = "Profilo"
         }
 
         // Get username from intent
-        val userName = intent.getStringExtra("USER_NAME") ?: "User"
+        val userName = intent.getStringExtra("USER_NAME") ?: "Utente"
 
         // Set username
         findViewById<TextView>(R.id.userName).text = userName

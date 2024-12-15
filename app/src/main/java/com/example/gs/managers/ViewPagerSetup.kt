@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gs.R
 import com.example.gs.adapters.PagesAdapter
+import com.example.gs.model.Game
 import com.example.gs.ui.fragments.HomeFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -13,7 +14,7 @@ class ViewPagerSetup(
     private val activity: AppCompatActivity,
     private val viewPager: ViewPager2,
     private val tabLayout: TabLayout,
-    private val gamesList: ArrayList<HomeFragment.Game>?
+    private val gamesList: ArrayList<Game>?
 ) {
     private lateinit var pagesAdapter: PagesAdapter
 

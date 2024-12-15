@@ -10,6 +10,7 @@
         android:id="@+id/imgTutorial"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/tutorial_image"
         android:scaleType="fitCenter"
         android:layout_marginHorizontal="48dp"
         android:layout_marginTop="80dp"

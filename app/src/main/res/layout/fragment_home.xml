@@ -36,7 +36,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/baseline_thumb_down_24"
-            android:backgroundTint="@color/backgroundGreen" />
+            android:backgroundTint="@color/backgroundGreen"
+            android:contentDescription="@string/skip_button" />
 
         <Space
             android:layout_width="100dp"
@@ -47,7 +48,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/round_thumb_up_24"
-            android:backgroundTint="@color/backgroundGreen" />
+            android:backgroundTint="@color/backgroundGreen"
+            android:contentDescription="@string/like_button" />
 
     </LinearLayout>
 

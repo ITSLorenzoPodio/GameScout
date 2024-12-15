@@ -96,7 +96,7 @@
                         android:id="@+id/statsTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/ProfileStats"
+                        android:text="@string/profile_stats"
                         android:textColor="@android:color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -108,7 +108,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="@string/LikedGames"
+                        android:text="@string/liked_games"
                         android:textColor="#E0E0E0"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toStartOf="@id/dislikedGamesLabel"
@@ -119,7 +119,7 @@
                         android:id="@+id/projectsCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="15"
+                        android:text="@string/liked_games_number"
                         android:textColor="@android:color/white"
                         android:textSize="24sp"
                         android:textStyle="bold"
@@ -131,7 +131,7 @@
                         android:id="@+id/dislikedGamesLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/DislikedGames"
+                        android:text="@string/disliked_games"
                         android:textColor="#E0E0E0"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toStartOf="@id/contributionsLabel"
@@ -142,7 +142,7 @@
                         android:id="@+id/followersCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1.2K"
+                        android:text="@string/disliked_games_number"
                         android:textColor="@android:color/white"
                         android:textSize="24sp"
                         android:textStyle="bold"
@@ -154,7 +154,7 @@
                         android:id="@+id/contributionsLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/SeenGames"
+                        android:text="@string/seen_games"
                         android:textColor="#E0E0E0"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +165,7 @@
                         android:id="@+id/contributionsCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1.2k"
+                        android:text="@string/viewed_games"
                         android:textColor="@android:color/white"
                         android:textSize="24sp"
                         android:textStyle="bold"
@@ -201,7 +201,7 @@
                         android:id="@+id/friendsTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/ProfileFriends"
+                        android:text="@string/profiled_friends"
                         android:textColor="@android:color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -223,6 +223,7 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:contentDescription="@string/friend_image"
                             android:scaleType="centerCrop"
                             android:src="@drawable/nothing" />
                     </androidx.cardview.widget.CardView>
@@ -232,7 +233,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/Nothing"
+                        android:text="@string/nothing"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="@id/nothingImage"
@@ -253,6 +254,7 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:contentDescription="@string/friend_image"
                             android:scaleType="centerCrop"
                             android:src="@drawable/parisi_presentation" />
                     </androidx.cardview.widget.CardView>
@@ -262,7 +264,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/LorenzoParisi"
+                        android:text="@string/lorenzo_parisi"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="@id/parisImage"
@@ -283,8 +285,9 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:contentDescription="@string/friend_image"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img_1" />
+                            android:src="@drawable/foto_presentazione" />
                     </androidx.cardview.widget.CardView>
 
                     <TextView
@@ -292,7 +295,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/Friend"
+                        android:text="@string/recchia"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="@id/gionataImage"
@@ -313,6 +316,7 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:contentDescription="@string/friend_image"
                             android:scaleType="centerCrop"
                             android:src="@drawable/podio_presentation" />
                     </androidx.cardview.widget.CardView>
@@ -322,7 +326,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/LorenzoPodio"
+                        android:text="@string/lorenzo_podio"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="@id/podImage"
