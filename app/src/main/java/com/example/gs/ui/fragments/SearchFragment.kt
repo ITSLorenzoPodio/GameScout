@@ -1,4 +1,4 @@
-package com.example.gs.pages
+package com.example.gs.ui.fragments
 
 import android.content.Context
 import android.graphics.Color
@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.gs.MainActivity
+import com.example.gs.ui.activities.MainActivity
 import com.example.gs.R
 import com.example.gs.adapters.CategoryAdapter
 import com.example.gs.adapters.RecentSearchAdapter

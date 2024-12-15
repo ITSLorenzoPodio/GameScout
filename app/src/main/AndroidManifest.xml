@@ -22,8 +22,8 @@
             android:name=".pages.LoadingActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".ui.activities.SettingsActivity"
+            android:parentActivityName=".ui.activities.MainActivity" />
 
         <activity
             android:name=".pages.AuthActivity"
@@ -39,7 +39,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="false" />
     </application>
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.gs.pages
+package com.example.gs.ui.fragments
 
 import android.content.Context
 import android.content.Intent
@@ -12,16 +12,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.example.gs.GameCollectionListener
-import com.example.gs.MainActivity
+import com.example.gs.ui.activities.GameCollectionListener
 import com.example.gs.R
-import com.example.gs.SwipeableCardView
+import com.example.gs.ui.components.SwipeableCardView
+import com.example.gs.ui.components.listeners.OnSwipeListener
 import kotlinx.parcelize.Parcelize
 
 interface CategorySelectionListener {
@@ -244,7 +243,7 @@ class HomeFragment : Fragment(), CategorySelectionListener {
         }
 
         // Imposta il listener per il swipe
-        cardView.setOnSwipeListener(object : SwipeableCardView.OnSwipeListener {
+        cardView.setOnSwipeListener(object : OnSwipeListener {
             override fun onSwipeLeft() {
                 gameCollectionListener?.onGameSaved(game, false)
                 removeTopCard()

@@ -3,9 +3,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.gs.pages.CollectionFragment
-import com.example.gs.pages.HomeFragment
-import com.example.gs.pages.SearchFragment
+import com.example.gs.ui.fragments.CollectionFragment
+import com.example.gs.ui.fragments.HomeFragment
+import com.example.gs.ui.fragments.SearchFragment
 
 // Adapter per gestire le pagine del ViewPager
 class PagesAdapter(

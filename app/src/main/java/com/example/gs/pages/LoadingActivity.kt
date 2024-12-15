@@ -2,11 +2,10 @@ package com.example.gs.pages
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gs.MainActivity
+import com.example.gs.ui.activities.MainActivity
 import com.example.gs.R
-import com.google.android.material.navigation.NavigationView
+import com.example.gs.ui.fragments.HomeFragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
