@@ -1,4 +1,4 @@
-package com.example.gs.pages
+package com.example.gs.ui.activities.pages
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.gs.R
 import com.example.gs.adapters.TutorialPagerAdapter
 import com.example.gs.model.TutorialPage
+import com.example.gs.ui.activities.LoadingActivity
 
 class TourActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2

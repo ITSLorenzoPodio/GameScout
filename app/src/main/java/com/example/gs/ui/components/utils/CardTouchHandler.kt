@@ -13,17 +13,20 @@ class CardTouchHandler(
     private var initialX = 0f
     private var initialY = 0f
     private var dX = 0f
+    private var isDragging = false
 
     fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         return when (ev.action) {
             MotionEvent.ACTION_DOWN -> {
-                initialX = cardView.x
-                initialY = cardView.y
+                isDragging = false
+                initialX = cardView.getOriginalX() // Use the stored original position
+                initialY = cardView.getOriginalY()
                 dX = cardView.x - ev.rawX
                 false
             }
             MotionEvent.ACTION_MOVE -> {
                 val moved = Math.abs(ev.rawX + dX - initialX)
+                if (moved > 10) isDragging = true
                 moved > 10
             }
             else -> false
@@ -33,13 +36,15 @@ class CardTouchHandler(
     fun onTouchEvent(event: MotionEvent): Boolean {
         return when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                initialX = cardView.x
-                initialY = cardView.y
+                isDragging = false
+                initialX = cardView.getOriginalX() // Use the stored original position
+                initialY = cardView.getOriginalY()
                 dX = cardView.x - event.rawX
                 true
             }
 
             MotionEvent.ACTION_MOVE -> {
+                isDragging = true
                 val moveX = event.rawX + dX - initialX
                 val rotation = (moveX / cardView.width) * Constants.ROTATION_FACTOR
 
@@ -54,6 +59,10 @@ class CardTouchHandler(
             }
 
             MotionEvent.ACTION_UP -> {
+                if (!isDragging) {
+                    return true
+                }
+
                 val moved = abs(cardView.x - initialX)
                 when {
                     moved > cardView.width * Constants.SWIPE_THRESHOLD -> {
@@ -67,6 +76,7 @@ class CardTouchHandler(
                         cardAnimator.resetPosition()
                     }
                 }
+                isDragging = false
                 true
             }
 

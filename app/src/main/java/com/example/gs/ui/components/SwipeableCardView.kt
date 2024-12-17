@@ -46,8 +46,11 @@ class SwipeableCardView : FrameLayout {
         touchHandler = CardTouchHandler(this, cardAnimator)
 
         with(this) {
-            originalX = x
-            originalY = y
+            // Store the original position AFTER layout
+            post {
+                originalX = x
+                originalY = y
+            }
             elevation = resources.displayMetrics.density * 8
             clipChildren = true
             clipToOutline = true

@@ -1,4 +1,4 @@
-package com.example.gs.pages
+package com.example.gs.ui.activities.pages
 
 import android.os.Bundle
 import android.view.MenuItem

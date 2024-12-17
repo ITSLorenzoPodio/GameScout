@@ -1,4 +1,4 @@
-package com.example.gs.pages
+package com.example.gs.ui.activities.pages
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gs.R
+import com.example.gs.ui.activities.LoadingActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

@@ -1,12 +1,11 @@
-package com.example.gs.pages
+package com.example.gs.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gs.ui.activities.MainActivity
 import com.example.gs.R
 import com.example.gs.model.Game
-import com.example.gs.ui.fragments.HomeFragment
+import com.example.gs.ui.activities.pages.TourActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase

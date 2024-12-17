@@ -13,20 +13,20 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".pages.ProfileActivity"
+            android:name=".ui.activities.pages.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".pages.AboutActivity"
+            android:name=".ui.activities.pages.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".pages.LoadingActivity"
+            android:name=".ui.activities.LoadingActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.SettingsActivity"
+            android:name=".ui.activities.pages.SettingsActivity"
             android:parentActivityName=".ui.activities.MainActivity" />
 
         <activity
-            android:name=".pages.AuthActivity"
+            android:name=".ui.activities.pages.AuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +35,7 @@
         </activity>
 
         <activity
-            android:name=".pages.TourActivity"
+            android:name=".ui.activities.pages.TourActivity"
             android:exported="false" />
 
         <activity

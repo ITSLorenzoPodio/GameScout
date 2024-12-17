@@ -7,10 +7,10 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.example.gs.R
-import com.example.gs.pages.ProfileActivity
-import com.example.gs.pages.AboutActivity
-import com.example.gs.pages.AuthActivity
-import com.example.gs.ui.activities.SettingsActivity
+import com.example.gs.ui.activities.pages.ProfileActivity
+import com.example.gs.ui.activities.pages.AboutActivity
+import com.example.gs.ui.activities.pages.AuthActivity
+import com.example.gs.ui.activities.pages.SettingsActivity
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
