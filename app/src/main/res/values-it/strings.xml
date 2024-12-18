@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="score">Punteggio:</string>
+    <string name="login">Accedi</string>
+    <string name="register">Registrati</string>
+    <string name="profile_stats">Statistiche</string>
+    <string name="disliked_games">Giochi non piaciuti</string>
+    <string name="seen_games">Giochi visti</string>
+    <string name="profiled_friends">Amici</string>
+    <string name="setting1">Notifiche</string>
+    <string name="setting4">Aiuto</string>
+    <string name="next">Avanti</string>
+    <string name="menu_button">Bottone menu</string>
+    <string name="logo_image">Logo</string>
+    <string name="friend_image">Icona amico</string>
+    <string name="game_image">Icona gioco</string>
+    <string name="show_more">Mostra di più</string>
+    <string name="skipped_games">Giochi non piaciuti</string>
+    <string name="like_button">Mi piace</string>
+    <string name="tutorial_image">Immagine per il tutorial</string>
+    <string name="nome_utente">Nome utente</string>
+    <string name="liked_games">Giochi piaciuti</string>
+    <string name="profile">Profilo</string>
+    <string name="settings">Impostazioni</string>
+    <string name="about_us">Riconoscimenti</string>
+    <string name="logout">Disconnettiti</string>
+</resources>

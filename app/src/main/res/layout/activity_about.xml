@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundGrey">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/aboutToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/backgroundGrey"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@color/white" />
+
+    <!-- Top Developer -->
+    <ImageView
+        android:id="@+id/topDevImg"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:contentDescription="@string/fabio_recchia"
+        android:scaleType="centerCrop"
+        android:src="@drawable/foto_presentazione"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/midDevImg"/>
+
+    <TextView
+        android:id="@+id/topDevText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/fabio_recchia"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/topDevImg"
+        app:layout_constraintStart_toStartOf="@id/topDevImg"
+        app:layout_constraintTop_toBottomOf="@id/topDevImg" />
+
+    <!-- Middle Developer -->
+    <ImageView
+        android:id="@+id/midDevImg"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:contentDescription="@string/lorenzo_podio"
+        android:scaleType="centerCrop"
+        android:src="@drawable/podio_presentation"
+        app:layout_constraintBottom_toTopOf="@id/botDevImg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topDevImg" />
+
+    <TextView
+        android:id="@+id/midDevText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/lorenzo_podio"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/midDevImg"
+        app:layout_constraintStart_toStartOf="@id/midDevImg"
+        app:layout_constraintTop_toBottomOf="@id/midDevImg" />
+
+    <!-- Bottom Developer -->
+    <ImageView
+        android:id="@+id/botDevImg"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="@string/lorenzo_parisi"
+        android:scaleType="centerCrop"
+        android:src="@drawable/parisi_presentation"
+        app:layout_constraintTop_toBottomOf="@id/midDevText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/botDevText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/lorenzo_parisi"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/botDevImg"
+        app:layout_constraintStart_toStartOf="@id/botDevImg"
+        app:layout_constraintTop_toBottomOf="@id/botDevImg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
